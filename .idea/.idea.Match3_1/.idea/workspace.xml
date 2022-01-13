@@ -3,14 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="873dcdcf-9898-448f-aa08-15afdc9fb67b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Match3_1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Match3_1/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Animations/Render.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Animations/Render.controller" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Prefabs/Jewel.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Prefabs/Jewel.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/Effect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/Effect.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/MapLoader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/MapLoader.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/HomeScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/HomeScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/PlayScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/PlayScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MenuController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/MenuController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Score.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Score.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Targets.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Targets.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/Object/Jewel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/Object/Jewel.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +79,7 @@
       <option name="presentableId" value="Default" />
       <updated>1642052883932</updated>
       <workItem from="1642052894467" duration="4076000" />
-      <workItem from="1642057213735" duration="11162000" />
+      <workItem from="1642057213735" duration="12265000" />
     </task>
     <servers />
   </component>

@@ -168,15 +168,22 @@ public class Jewel : MonoBehaviour
         {
             if (MapLoader.gameStarted)
             {
+                Score.Increment(3);
                 Targets.TargetMatch(type, 3);
             }
             CallDestroy(new Vector2(-1, -1), 0);
         }
         else if (listX.Count + listY.Count == 4)
         {
+            if (MapLoader.gameStarted)
+            {
+                Score.Increment(4);
+            }
             Vector2 tmp = Editor.powerUp1(type,listX, listY);
             if (x != (int)tmp.x || y != (int)tmp.y)
+            {
                 CallDestroy(tmp, 0);
+            }
             /*else if (PowerUp == 0)
             {
                 CallDestroy(tmp, 1);
@@ -191,18 +198,25 @@ public class Jewel : MonoBehaviour
         }
         else if (listX.Count + listY.Count >= 5)
         {
+            if (MapLoader.gameStarted)
+            {
+                Score.Increment(5);
+            }
             Vector2 tmp = Editor.PowerUpType(listX, listY);
             if (x != (int)tmp.x || y != (int)tmp.y)
+            {
                 Destroying();
-            /*else
+            }
+            else
             {
                 CallDestroy(tmp, 0);
-                mtransform.Find("Render").GetComponent<SpriteRenderer>().enabled = false;
-                type = 9;
-                PowerUp = 9;
-                Effect.SpawnType9(effect[1], gameObject);
-                Editor.LightingRandomPoint();
-            }*/
+                Destroying();
+                //mtransform.Find("Render").GetComponent<SpriteRenderer>().enabled = false;
+                //type = 9;
+                //PowerUp = 9;
+                //Effect.SpawnType9(effect[1], gameObject);
+                //Editor.LightingRandomPoint();
+            }
 
         }
         isProcess = false;

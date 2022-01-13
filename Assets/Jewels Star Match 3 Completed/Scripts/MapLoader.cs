@@ -71,6 +71,8 @@ public class MapLoader : MonoBehaviour
             RandomLevelTokenList.Add(1);  // boss
             RandomLevelTokenList.Add(2);  // cougar
             RandomLevelTokenList.Add(3);  // pink
+            RandomLevelTokenList.Add(11); // usdc
+            RandomLevelTokenList.Add(10); // solana
         }
         else if (randomLevel == 2)
         {
@@ -78,6 +80,8 @@ public class MapLoader : MonoBehaviour
             RandomLevelTokenList.Add(1);  // boss
             RandomLevelTokenList.Add(5);  // harmonape
             RandomLevelTokenList.Add(6);  // harmony
+            RandomLevelTokenList.Add(9);  // rvrs
+            RandomLevelTokenList.Add(8);  // monster
         }
         else if (randomLevel == 3)
         {
@@ -85,6 +89,8 @@ public class MapLoader : MonoBehaviour
             RandomLevelTokenList.Add(1);  // boss
             RandomLevelTokenList.Add(8);  // monster
             RandomLevelTokenList.Add(9);  // rvrs
+            RandomLevelTokenList.Add(5);  // harmonape
+            RandomLevelTokenList.Add(3);  // pink
         }
         else if (randomLevel == 4)
         {
@@ -92,13 +98,13 @@ public class MapLoader : MonoBehaviour
             RandomLevelTokenList.Add(1);  // boss
             RandomLevelTokenList.Add(11); // usdc
             RandomLevelTokenList.Add(0);  // bitcoin
+            RandomLevelTokenList.Add(7);  // hydra
+            RandomLevelTokenList.Add(3);  // pink
         }
 
         var randomList = RandomLevelTokenList.GetRandomElements(3);
-        if (!randomList.Contains(0))
-        {
-            randomList[0] = 0;
-        }
+        if (!randomList.Contains(1)) { randomList[0] = 1; }
+        
         Targets.Instance.PopulateTargets(randomList);
         
         ///- Level Wait
