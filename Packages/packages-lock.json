@@ -1,5 +1,11 @@
 {
   "dependencies": {
+    "com.marijnzwemmer.unity-toolbar-extender": {
+      "version": "file:unity-toolbar-extender-1.4.1",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "com.unity.2d.animation": {
       "version": "5.0.7",
       "depth": 0,
@@ -158,6 +164,13 @@
         "com.unity.modules.ui": "1.0.0",
         "com.unity.modules.imgui": "1.0.0"
       }
+    },
+    "com.utility.sceneswitcher": {
+      "version": "https://github.com/wajahatdeveloper/Modules.git?path=/Assets/EditorModules/com.utility.sceneswitcher",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "56f975c0171fa756c032b052e367ef29037cbc69"
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",

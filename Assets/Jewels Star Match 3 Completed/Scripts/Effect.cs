@@ -17,9 +17,12 @@ public class Effect : MonoBehaviour
 						idx = 12;
             if(!Menu.IsLose && !Menu.IsWin)            
 			    MapLoader.score += (idx+1) * 10;
-            
-            if (MapLoader.Mode ==0)
-                 GameObject.Find("top").GetComponent<Menu>().scoreinc((idx + 1) * 5);
+
+            if (MapLoader.Mode == 0)
+            {
+	            Score.Increment(1);
+            }
+                // GameObject.Find("top").GetComponent<Menu>().scoreinc((idx + 1) * 5);
 			tmp.transform.Find ("Render").GetComponent<SpriteRenderer> ().sprite = s[idx];
             tmp.transform.localPosition = new Vector3(pos.x, pos.y, -1.2f);
 

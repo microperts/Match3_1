@@ -6,15 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Jewels Star Match 3 Completed/Scenes/HomeScene.unity
+    path: Assets/Scenes/HomeScene.unity
     guid: 5c05601606b21804fa9681b21edbb72d
   - enabled: 1
-    path: Assets/Jewels Star Match 3 Completed/Scenes/MapSelect.unity
-    guid: a35dcaec89bbb8d41927aa1e7468a4d2
-  - enabled: 1
-    path: Assets/Jewels Star Match 3 Completed/Scenes/PlayScene.unity
+    path: Assets/Scenes/PlayScene.unity
     guid: abb3a0675751c3d45a0708b38b22b7c4
-  - enabled: 1
-    path: Assets/Jewels Star Match 3 Completed/Scenes/WorldSelect.unity
-    guid: b2fcfe42c61855e469d30ce998e255cc
   m_configObjects: {}
