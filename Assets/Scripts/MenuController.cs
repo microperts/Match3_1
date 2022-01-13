@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,23 @@ using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour
 {
+    public static bool returningPlay = false;
+
+    public GameObject loadingPanel;
+
+    private void OnEnable()
+    {
+        Time.timeScale = 1.0f;
+        if (returningPlay)
+        {
+            OnClick_Play();
+        }
+        else
+        {
+            loadingPanel.SetActive(false);
+        }
+    }
+
     public void OnClick_Play()
     {
         Player p = new Player();

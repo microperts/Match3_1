@@ -55,8 +55,12 @@ public class Targets : MonoBehaviour
         if (!TargetValues.ContainsKey(targetType)) { return; }
         
         TargetValues[targetType] -= count;
-        
-        if (TargetValues[targetType] <= 0) { TargetValues[targetType] = 0; }
+
+        if (TargetValues[targetType] <= 0)
+        {
+            TargetTransforms[targetType].GetChild(2).gameObject.SetActive(true);
+            TargetValues[targetType] = 0;
+        }
     }
     
     private void Update()

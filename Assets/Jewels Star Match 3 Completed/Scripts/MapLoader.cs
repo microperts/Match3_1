@@ -30,7 +30,13 @@ public class MapLoader : MonoBehaviour
         time = TIMEPLAYER;
         PlayerPrefs.DeleteAll();
     }
-    // Use this for initialization
+
+    public void RestartGame()
+    {
+        MenuController.returningPlay = true;
+        SceneManagerX.LoadPreviousScene();
+    }
+    
     IEnumerator Start()
     {
         Time.timeScale = 1;
@@ -87,8 +93,13 @@ public class MapLoader : MonoBehaviour
             RandomLevelTokenList.Add(11); // usdc
             RandomLevelTokenList.Add(0);  // bitcoin
         }
-        
-        Targets.Instance.PopulateTargets(RandomLevelTokenList.GetRandomElements(3));
+
+        var randomList = RandomLevelTokenList.GetRandomElements(3);
+        if (!randomList.Contains(0))
+        {
+            randomList[0] = 0;
+        }
+        Targets.Instance.PopulateTargets(randomList);
         
         ///- Level Wait
         gameStarted = false;

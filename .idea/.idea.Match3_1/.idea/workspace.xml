@@ -3,33 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="873dcdcf-9898-448f-aa08-15afdc9fb67b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Match3_1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Match3_1/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Animations/Render.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Animations/Render.controller" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Prefabs/Jewel.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Prefabs/Jewel.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/CellScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/CellScript.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/Editor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/Editor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/JewelSpawn.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/JewelSpawn.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/MapLoader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/MapLoader.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/Object/Cell.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/Object/Cell.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/Object/Jewel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/Object/Jewel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/Play/Menu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/Play/Menu.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/Play/Process.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/Play/Process.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/Supporter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/Supporter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/Touch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/Touch.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Loading.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Loading.cs.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/HomeScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/HomeScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/PlayScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/PlayScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Score.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Score.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Turn.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Turn.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/ApiUpdaterCheck.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/ApiUpdaterCheck.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/AssetImportWorker0.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/AssetImportWorker0.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-AssetImportWorker0.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/shadercompiler-AssetImportWorker0.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MenuController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/MenuController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Score.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Score.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Targets.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Targets.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +83,7 @@
       <option name="presentableId" value="Default" />
       <updated>1642052883932</updated>
       <workItem from="1642052894467" duration="4076000" />
-      <workItem from="1642057213735" duration="10071000" />
+      <workItem from="1642057213735" duration="11162000" />
     </task>
     <servers />
   </component>

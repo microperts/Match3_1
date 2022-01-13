@@ -27,6 +27,7 @@ public class Turn : MonoBehaviour
         Value = Value - value;
         if (Value <= 0)
         {
+            Time.timeScale = 0.00000001f;
             UIControl.Instance.losePanel.SetActive(true);
             onZero?.Invoke();
         }
