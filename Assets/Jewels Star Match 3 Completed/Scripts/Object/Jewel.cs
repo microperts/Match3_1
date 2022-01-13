@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 
 public class Jewel : MonoBehaviour
 {
@@ -152,6 +153,8 @@ public class Jewel : MonoBehaviour
 
     IEnumerator JewelProcess()
     {
+        ///- Matching
+        
         isProcess = true;
         yield return null;
         x = (int)PosMap.x;
@@ -162,10 +165,16 @@ public class Jewel : MonoBehaviour
         listX = JewelController.RowChecker(type, y, x);
         listY = JewelController.ColumnChecker(type, x, y);
         if (listX.Count + listY.Count == 3)
+        {
+            if (MapLoader.gameStarted)
+            {
+                Targets.TargetMatch(type, 3);
+            }
             CallDestroy(new Vector2(-1, -1), 0);
+        }
         else if (listX.Count + listY.Count == 4)
         {
-            Vector2 tmp = Editor.powerUp1(listX, listY);
+            Vector2 tmp = Editor.powerUp1(type,listX, listY);
             if (x != (int)tmp.x || y != (int)tmp.y)
                 CallDestroy(tmp, 0);
             /*else if (PowerUp == 0)
@@ -237,18 +246,29 @@ public class Jewel : MonoBehaviour
             JewelSpawn.JewelList[(int)PosMap.x, (int)PosMap.y] = null;
             isDestroy = true;
 
-            try
+            /*try
             {
                 CellScript.Cells[(int)PosMap.x, (int)PosMap.y].GetComponent<Cell>().playAnimation();
             }
-            catch { }
+            catch { }*/
 
             yield return new WaitForSeconds(0.2f);
 
-            mtransform.Find("Render").GetComponent<Animator>().SetInteger("state", type);
+            if (Targets.IsTargetType(type))
+            {
+                var endValue = Targets.Instance.GetTargetTransform(type).position;
+                gameObject.transform.DOMove(endValue, 0.2f).OnComplete(() =>
+                {
+                    mtransform.Find("Render").GetComponent<Animator>().SetInteger("state", 6);
+                });
+            }
+            else
+            {
+                mtransform.Find("Render").GetComponent<Animator>().SetInteger("state", 6);
+            }
             Editor.cellprocess((int)PosMap.x, (int)PosMap.y);
             //PowerProcess(PowerUp);
-            Effect.SpawnNumber(new Vector2(mtransform.position.x, mtransform.position.y), Number, NumberSprite, 0.5f);
+            //Effect.SpawnNumber(new Vector2(mtransform.position.x, mtransform.position.y), Number, NumberSprite, 0.5f);
 
             if (isSound)
                 Sound.sound.jewelclr();
@@ -331,12 +351,14 @@ public class Jewel : MonoBehaviour
                         tmp.GetComponent<Jewel>().Destroying();
                     }
             }
-            /*else
+            else
             {
                 GameObject tmp = JewelSpawn.JewelList[(int)v.x, (int)v.y];
-                if (tmp != null && !tmp.GetComponent<Jewel>().isDestroy && tmp.GetComponent<Jewel>().type == type)
-                    tmp.GetComponent<Jewel>().DoPowerUp(1);
-            }*/
+                /*if (tmp != null && !tmp.GetComponent<Jewel>().isDestroy && tmp.GetComponent<Jewel>().type == type)
+                {
+                    /*tmp.GetComponent<Jewel>().DoPowerUp(1);#1#
+                }*/
+            }
         }
     }
 

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 using System.Text.RegularExpressions;
 /// <summary>
@@ -6,6 +7,8 @@ using System.Text.RegularExpressions;
 /// </summary>
 public class CellScript : MonoBehaviour
 {
+    public static CellScript Instance;
+    
     static public int[,] map;
     public GameObject CellPrefab;
     public Vector2Int Size;
@@ -16,11 +19,14 @@ public class CellScript : MonoBehaviour
     public static bool isCellMove = false;
     public static bool movedone = true;
 
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     // Use this for initialization
     void Start()
     {
-
         Cells = new GameObject[Size.x,Size.y];
         map = new int[Size.x,Size.y];
         map = mapReader(MapLoader.MapPlayer.Name);
@@ -96,7 +102,7 @@ public class CellScript : MonoBehaviour
     /// <returns></returns>
     int[,] mapReader(string mapname)
     {
-        int[,] tmpmap = new int[7, 9];
+        int[,] tmpmap = new int[CellScript.Instance.Size.x, CellScript.Instance.Size.y];
         string mapdata = "";
         string assetpath = @"Assets/Jewels Star Match 3 Completed/Resources/Maps/" + mapname + ".txt";
 #if UNITY_EDITOR

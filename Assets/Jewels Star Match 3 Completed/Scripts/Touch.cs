@@ -33,14 +33,14 @@ public class Touch : MonoBehaviour
     Supporter sp;
 
     public GameObject vienxanh;
-    float clicktime = 0.2f;
+    
+    private float clicktime = 0.2f;
+    private bool giveHint = false;
+    
     void Start()
     {
-
-#if UNITY_IPHONE
-      Application.targetFrameRate = 60;
-#endif
-
+        Turn.Value = Random.Range(15, 21);
+        
         sp = new Supporter();
         Editor.down = false;
         supportTimeRp = 5f;
@@ -49,6 +49,12 @@ public class Touch : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        ///- Hint Button
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            giveHint = true;
+        }
+        
         if (isMove)
         {
             if (clicktime > 0)
@@ -130,9 +136,13 @@ public class Touch : MonoBehaviour
     void SupposterTimeCountdown()
     {
         if (Menu.isRun && supportTimeRp <= 0 && JewelSpawn.spawnStart)
+        {
             Supposter();
+        }
         else if (Menu.isRun)
+        {
             supportTimeRp -= Time.deltaTime;
+        }
 
         if (supportTime > 0 && Menu.isRun)
         {
@@ -142,27 +152,34 @@ public class Touch : MonoBehaviour
         else if (!isSP && Menu.isRun)
         {
             isSP = true;
-            try
+            if (giveHint)
             {
-                SupportObj[0].transform.Find("Render").GetComponent<Animator>().SetInteger("state", 101);
-                SupportObj[1].transform.Find("Render").GetComponent<Animator>().SetInteger("state", 101);
+                giveHint = false;
+                try
+                {
+                    SupportObj[0].transform.Find("Render").GetComponent<Animator>().SetInteger("state", 101);
+                    SupportObj[1].transform.Find("Render").GetComponent<Animator>().SetInteger("state", 101);
+                }
+                catch
+                {
+                }
             }
-            catch
-            {
-            }
+            
         }
     }
 
     void Supposter()
     {
-
         if (SupportObj[0] == null)
         {
             sp.SetVirtualJewel();
             SupportObj = sp.MoveSupportGameObject();
             if (SupportObj[0] == null)
             {
-                if (MapLoader.Mode == 1)
+                StartCoroutine(waitnomove());
+                supportTimeRp = 5f;
+                
+                /*if (MapLoader.Mode == 1)
                 {
                     StartCoroutine(waitnomove());
                     supportTimeRp = 5f;
@@ -173,7 +190,7 @@ public class Touch : MonoBehaviour
                     LoseUI.SetActive(true);
                     PlayingUI.SetActive(false);
                     Sound.sound.fail();
-                }
+                }*/
 
             }
         }
@@ -312,7 +329,7 @@ public class Touch : MonoBehaviour
         Touch.supportTimeRp = 1.5f;
         isMove = true;
 
-        if (obj1 != null && obj2 != null && obj1.GetComponent<Jewel>().type == 9 && obj2.GetComponent<Jewel>().type != 99)
+        /*if (obj1 != null && obj2 != null && obj1.GetComponent<Jewel>().type == 9 && obj2.GetComponent<Jewel>().type != 99)
         {
             StartCoroutine(Editor.DestroyAllType(obj2));
             JewelSwap(obj1, obj2);
@@ -326,7 +343,7 @@ public class Touch : MonoBehaviour
             obj1.GetComponent<Jewel>().Destroying();
             obj2.GetComponent<Jewel>().Destroying();
         }
-        else
+        else*/
         {
             bool check1 = BackChecker(obj1, obj2);
             bool check2 = BackChecker(obj2, obj1);
@@ -335,6 +352,7 @@ public class Touch : MonoBehaviour
                 ListSwap(obj1, obj2);
                 obj1.GetComponent<Jewel>().JewelProcessing();
                 obj2.GetComponent<Jewel>().JewelProcessing();
+                Turn.Decrement(1);
                 JewelSwap(obj1, obj2);
             }
             else

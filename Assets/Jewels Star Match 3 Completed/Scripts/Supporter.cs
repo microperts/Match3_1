@@ -5,13 +5,13 @@ using System.Collections.Generic;
 public class Supporter : MonoBehaviour
 {
 
-    int[,] virtualjewel = new int[7, 9];
+    int[,] virtualjewel = new int[CellScript.Instance.Size.x, CellScript.Instance.Size.y];
     public Vector2[] Result = new Vector2[2];
 
     public void SetVirtualJewel()
     {
-        for (int x = 0; x < 7; x++)
-            for (int y = 0; y < 9; y++)
+        for (int x = 0; x < CellScript.Instance.Size.x; x++)
+            for (int y = 0; y < CellScript.Instance.Size.y; y++)
             {
                 GameObject tmp = JewelSpawn.JewelList[x, y];
                 if (tmp != null && CellScript.map[x, y] < 10)
@@ -28,8 +28,8 @@ public class Supporter : MonoBehaviour
         SetVirtualJewel();
         Vector2[] tmp = new Vector2[2];
         GameObject[] Objtmp = new GameObject[2];
-        for (int i = 0; i < 7; i++)
-            for (int j = 0; j < 9; j++)
+        for (int i = 0; i < CellScript.Instance.Size.x; i++)
+            for (int j = 0; j < CellScript.Instance.Size.y; j++)
             {
                 if (virtualjewel[i, j] >= 0)
                 {
@@ -62,8 +62,8 @@ public class Supporter : MonoBehaviour
 
     void setDefaut()
     {
-        for (int i = 0; i < 7; i++)
-            for (int j = 0; j < 9; j++)
+        for (int i = 0; i < CellScript.Instance.Size.x; i++)
+            for (int j = 0; j < CellScript.Instance.Size.y; j++)
                 virtualjewel[i, j] = -1;
     }
 
@@ -109,9 +109,9 @@ public class Supporter : MonoBehaviour
         tmp[0] = new Vector2(-1, -1);
         tmp[1] = new Vector2(-1, -1);
 
-        if (virtualjewel[x, y] == 9)
+        if (virtualjewel[x, y] == CellScript.Instance.Size.y)
         {
-            if (y + 1 < 9 && virtualjewel[x, y + 1] >= 0)
+            if (y + 1 < CellScript.Instance.Size.y && virtualjewel[x, y + 1] >= 0)
             {
                 tmp[0] = new Vector2(x, y);
                 tmp[1] = new Vector2(x, y + 1);
@@ -126,7 +126,7 @@ public class Supporter : MonoBehaviour
         }
 
 
-        if ((int)v.y > y && y + 2 < 9 && virtualjewel[x, y + 2] >= 0)
+        if ((int)v.y > y && y + 2 < CellScript.Instance.Size.y && virtualjewel[x, y + 2] >= 0)
         {
             if (x - 1 >= 0 && virtualjewel[x - 1, y + 2] == virtualjewel[x, y])
             {
@@ -134,13 +134,13 @@ public class Supporter : MonoBehaviour
                 tmp[1] = new Vector2(x - 1, y + 2);
                 return tmp;
             }
-            else if (x + 1 <= 6 && virtualjewel[x + 1, y + 2] == virtualjewel[x, y])
+            else if (x + 1 <= CellScript.Instance.Size.x-1 && virtualjewel[x + 1, y + 2] == virtualjewel[x, y])
             {
                 tmp[0] = new Vector2(x, y + 2);
                 tmp[1] = new Vector2(x + 1, y + 2);
                 return tmp;
             }
-            else if (y + 3 <= 8 && virtualjewel[x, y + 3] == virtualjewel[x, y])
+            else if (y + 3 <= CellScript.Instance.Size.y-1 && virtualjewel[x, y + 3] == virtualjewel[x, y])
             {
                 tmp[0] = new Vector2(x, y + 2);
                 tmp[1] = new Vector2(x, y + 3);
@@ -156,7 +156,7 @@ public class Supporter : MonoBehaviour
                 tmp[1] = new Vector2(x - 1, y - 2);
                 return tmp;
             }
-            else if (x + 1 <= 6 && virtualjewel[x + 1, y - 2] == virtualjewel[x, y])
+            else if (x + 1 <= CellScript.Instance.Size.x-1 && virtualjewel[x + 1, y - 2] == virtualjewel[x, y])
             {
                 tmp[0] = new Vector2(x, y - 2);
                 tmp[1] = new Vector2(x + 1, y - 2);
@@ -180,9 +180,9 @@ public class Supporter : MonoBehaviour
         tmp[0] = new Vector2(-1, -1);
         tmp[1] = new Vector2(-1, -1);
 
-        if (virtualjewel[x, y] == 9)
+        if (virtualjewel[x, y] == CellScript.Instance.Size.y)
         {
-            if (x + 1 < 7 && virtualjewel[x + 1, y] >= 0)
+            if (x + 1 < CellScript.Instance.Size.x && virtualjewel[x + 1, y] >= 0)
             {
                 tmp[0] = new Vector2(x, y);
                 tmp[1] = new Vector2(x + 1, y);
@@ -196,7 +196,7 @@ public class Supporter : MonoBehaviour
             }
         }
 
-        if ((int)v.x > x && x + 2 < 7 && virtualjewel[x + 2, y] >= 0)
+        if ((int)v.x > x && x + 2 < CellScript.Instance.Size.x && virtualjewel[x + 2, y] >= 0)
         {
             if (y - 1 >= 0 && virtualjewel[x + 2, y - 1] == virtualjewel[x, y])
             {
@@ -204,13 +204,13 @@ public class Supporter : MonoBehaviour
                 tmp[1] = new Vector2(x + 2, y - 1);
                 return tmp;
             }
-            else if (y + 1 <= 8 && virtualjewel[x + 2, y + 1] == virtualjewel[x, y])
+            else if (y + 1 <= CellScript.Instance.Size.y-1 && virtualjewel[x + 2, y + 1] == virtualjewel[x, y])
             {
                 tmp[0] = new Vector2(x + 2, y);
                 tmp[1] = new Vector2(x + 2, y + 1);
                 return tmp;
             }
-            else if (x + 3 <= 6 && virtualjewel[x + 3, y] == virtualjewel[x, y])
+            else if (x + 3 <= CellScript.Instance.Size.x-1 && virtualjewel[x + 3, y] == virtualjewel[x, y])
             {
                 tmp[0] = new Vector2(x + 2, y);
                 tmp[1] = new Vector2(x + 3, y);
@@ -225,7 +225,7 @@ public class Supporter : MonoBehaviour
                 tmp[1] = new Vector2(x - 2, y - 1);
                 return tmp;
             }
-            else if (y + 1 <= 8 && virtualjewel[x - 2, y + 1] == virtualjewel[x, y])
+            else if (y + 1 <= CellScript.Instance.Size.y-1 && virtualjewel[x - 2, y + 1] == virtualjewel[x, y])
             {
                 tmp[0] = new Vector2(x - 2, y);
                 tmp[1] = new Vector2(x - 2, y + 1);
@@ -250,11 +250,11 @@ public class Supporter : MonoBehaviour
         tmp[2] = new Vector2(x, y - 1);
         tmp[3] = new Vector2(x, y + 1);
 
-        if (virtualjewel[x, y] == 9)
+        if (virtualjewel[x, y] == CellScript.Instance.Size.y)
         {
             for (int i = 0; i < 4; i++)
                 if ((int)tmp[i].x >= 0 && (int)tmp[i].y >= 0)
-                    if ((int)tmp[i].x < 7 && (int)tmp[i].y < 9)
+                    if ((int)tmp[i].x < CellScript.Instance.Size.x && (int)tmp[i].y < CellScript.Instance.Size.y)
                         lsttmp.Add(tmp[i]);
             return lsttmp;
         }
@@ -262,7 +262,7 @@ public class Supporter : MonoBehaviour
 
         for (int i = 0; i < 4; i++)
             if ((int)tmp[i].x >= 0 && (int)tmp[i].y >= 0)
-                if ((int)tmp[i].x < 7 && (int)tmp[i].y < 9)
+                if ((int)tmp[i].x < CellScript.Instance.Size.x && (int)tmp[i].y < CellScript.Instance.Size.y)
                     if (virtualjewel[(int)tmp[i].x, (int)tmp[i].y] == virtualjewel[x, y])
                         lsttmp.Add(tmp[i]);
         return lsttmp;
@@ -280,7 +280,7 @@ public class Supporter : MonoBehaviour
 
         for (int i = 0; i < 4; i++)
             if ((int)tmp[i].x >= 0 && (int)tmp[i].y >= 0)
-                if ((int)tmp[i].x < 7 && (int)tmp[i].y < 9)
+                if ((int)tmp[i].x < CellScript.Instance.Size.x && (int)tmp[i].y < CellScript.Instance.Size.y)
                     if (virtualjewel[(int)tmp[i].x, (int)tmp[i].y] == virtualjewel[x, y])
                         lsttmp.Add(tmp[i]);
 

@@ -91,8 +91,8 @@ public class Menu : MonoBehaviour
         JewelSpawn.spawnStart = false;
         Touch.supportTimeRp = 5f;
         //destroy all
-        for (int x = 0; x < 7; x++)
-            for (int y = 0; y < 9; y++)
+        for (int x = 0; x < CellScript.Instance.Size.x; x++)
+            for (int y = 0; y < CellScript.Instance.Size.y; y++)
                 if (JewelSpawn.JewelList[x, y] != null)
                     JewelSpawn.JewelList[x, y].GetComponent<Jewel>().Destroying();
         yield return new WaitForSeconds(1.5f);

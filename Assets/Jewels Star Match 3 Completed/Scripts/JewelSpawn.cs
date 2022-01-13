@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Random = UnityEngine.Random;
 
 public class JewelSpawn : MonoBehaviour
 {
@@ -20,9 +22,9 @@ public class JewelSpawn : MonoBehaviour
     void Start()
     {
         spawnStart = true;
-        JewelList = new GameObject[7, 9];
-        posX = new int[7];
-        QuaX = new int[7];
+        JewelList = new GameObject[CellScript.Instance.Size.x, CellScript.Instance.Size.y];
+        posX = new int[CellScript.Instance.Size.x];
+        QuaX = new int[CellScript.Instance.Size.x];
         sp = new Supporter();
     }
 
@@ -46,9 +48,9 @@ public class JewelSpawn : MonoBehaviour
             sy = (int)MapLoader.starwin.GetComponent<Jewel>().PosMap.y;
         }
 
-        for (int x = 0; x < 7; x++)
+        for (int x = 0; x < CellScript.Instance.Size.x; x++)
         {
-            for (int y = 8; y >= 0; y--)
+            for (int y = CellScript.Instance.Size.y-1; y >= 0; y--)
             {
                 if (map[x, y] > 0)
                 {
@@ -91,10 +93,12 @@ public class JewelSpawn : MonoBehaviour
 
     int RandomJewel()
     {
-        if (MapLoader.Mode == 1)
+        return MapLoader.RandomLevelTokenList.PickRandom();
+        
+        /*if (MapLoader.Mode == 1)
             return Random.Range(0, 6);
         else
-            return Random.Range(0, 7);
+            return Random.Range(0, 7);*/
     }
 
     public void Spawn(int x, int y)
@@ -129,11 +133,11 @@ public class JewelSpawn : MonoBehaviour
     {
         if (spawnStart)
         {
-            for (int i = 0; i < 7; i++)
+            for (int i = 0; i < CellScript.Instance.Size.x; i++)
             {
                 posX[i] = 0;
                 int start = 0;
-                for (int s = 0; s < 9; s++)
+                for (int s = 0; s < CellScript.Instance.Size.y; s++)
                     if (CellScript.map[i, s] % 10 == 4)
                     {
                         start = s;
@@ -143,7 +147,7 @@ public class JewelSpawn : MonoBehaviour
                     start = -1;
 
 
-                for (int j = start + 1; j < 9; j++)
+                for (int j = start + 1; j < CellScript.Instance.Size.y; j++)
                     if (CellScript.map[i, j] > 0)
                         if (JewelSpawn.JewelList[i, j] == null || JewelSpawn.JewelList[i, j].GetComponent<Jewel>().isDestroy)
                         {
@@ -157,14 +161,39 @@ public class JewelSpawn : MonoBehaviour
     void Respawn()
     {
 
-        for (int i = 0; i < 7; i++)
+        for (int i = 0; i < CellScript.Instance.Size.x; i++)
         {
-            for (int j = 0; j < 9; j++)
+            for (int j = 0; j < CellScript.Instance.Size.y; j++)
                 if (JewelList[i, j] != null)
                     Destroy(JewelList[i, j]);
         }
 
         StartGameSpawn(CellScript.map);
 
+    }
+    
+    
+}
+
+public static class EnumerableExtension
+{
+    public static T PickRandom<T>(this IEnumerable<T> source)
+    {
+        return source.PickRandom(1).Single();
+    }
+
+    public static IEnumerable<T> PickRandom<T>(this IEnumerable<T> source, int count)
+    {
+        return source.Shuffle().Take(count);
+    }
+
+    public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source)
+    {
+        return source.OrderBy(x => Guid.NewGuid());
+    }
+    
+    public static List<T> GetRandomElements<T>(this IEnumerable<T> list, int elementsCount)
+    {
+        return list.OrderBy(arg => Guid.NewGuid()).Take(elementsCount).ToList();
     }
 }

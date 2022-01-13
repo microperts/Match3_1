@@ -2,11 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class Turn : MonoBehaviour
 {
     public Text textElement;
+
+    public static UnityEvent onZero;
     
     public static int Value
     {
@@ -17,6 +20,16 @@ public class Turn : MonoBehaviour
     public static void Increment(int value)
     {
         Value = Value + value;
+    }
+    
+    public static void Decrement(int value)
+    {
+        Value = Value - value;
+        if (Value <= 0)
+        {
+            UIControl.Instance.losePanel.SetActive(true);
+            onZero?.Invoke();
+        }
     }
 
     private void Update()

@@ -121,7 +121,7 @@ public class Cell : MonoBehaviour
     /// <returns></returns>
     bool checkmap()
     {
-        for (int i = y + 1; i < 9; i++)
+        for (int i = y + 1; i < CellScript.Instance.Size.y; i++)
             if (CellScript.map[x, i] % 10 == 4)
                 return false;
         return true;

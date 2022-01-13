@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.extensions": {
+      "version": "https://github.com/wajahatdeveloper/Modules.git?path=/Assets/com.extensions",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "56f975c0171fa756c032b052e367ef29037cbc69"
+    },
     "com.marijnzwemmer.unity-toolbar-extender": {
       "version": "file:unity-toolbar-extender-1.4.1",
       "depth": 0,

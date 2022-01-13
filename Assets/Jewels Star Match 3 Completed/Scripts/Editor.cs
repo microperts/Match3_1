@@ -14,12 +14,45 @@ public class Editor : MonoBehaviour
     public static bool[] isclickX = new bool[7];
     public static int[] isclickY = new int[8];
     // Use this for initialization
-    public static Vector2 powerUp1(List<Vector2> r, List<Vector2> c)
+    public static Vector2 powerUp1(int type, List<Vector2> r, List<Vector2> c)
     {
+        if (MapLoader.gameStarted)
+        {
+            if (r.Count == 5 && NeiChecker(r))
+            {
+                Debug.Log("5 match Row");
+                Targets.TargetMatch(type, 5);
+                Turn.Increment(2);
+            }
+            else if (c.Count == 5 && NeiChecker(c))
+            {
+                Debug.Log("5 match Column");
+                Targets.TargetMatch(type, 5);
+                Turn.Increment(2);
+            }
+            
+            if (r.Count == 4 && NeiChecker(r))
+            {
+                Debug.Log("4 match Row");
+                Targets.TargetMatch(type, 4);
+                Turn.Increment(1);
+            }
+            else if (c.Count == 4 && NeiChecker(c))
+            {
+                Debug.Log("4 match Column");
+                Targets.TargetMatch(type, 4);
+                Turn.Increment(1);
+            }
+        }
+
         if (r.Count == 4 && NeiChecker(r))
+        {
             return r[1];
+        }
         else if (c.Count == 4 && NeiChecker(c))
+        {
             return c[1];
+        }
 
         return new Vector2(-1, -1);
     }
@@ -79,8 +112,8 @@ public class Editor : MonoBehaviour
 
     public static void DropAll()
     {
-        for (int j = 0; j < 9; j++)
-            for (int i = 0; i < 7; i++)
+        for (int j = 0; j < CellScript.Instance.Size.y; j++)
+            for (int i = 0; i < CellScript.Instance.Size.x; i++)
                 if (JewelSpawn.JewelList[i, j] != null && !JewelSpawn.JewelList[i, j].GetComponent<Jewel>().isDestroy)
                     JewelSpawn.JewelList[i, j].GetComponent<Jewel>().JewelDrop();
     }
@@ -101,9 +134,9 @@ public class Editor : MonoBehaviour
         int y = (int)PosMap.y;
 
         for (int i = x - 1; i <= x + 1; i++)
-            if (i >= 0 && i <= 6)
+            if (i >= 0 && i <= CellScript.Instance.Size.x-1)
                 for (int j = y - 1; j <= y + 1; j++)
-                    if (j >= 0 && j <= 8)
+                    if (j >= 0 && j <= CellScript.Instance.Size.y-1)
                     {
                         if (JewelSpawn.JewelList[i, j] != null && JewelSpawn.JewelList[i, j].GetComponent<Jewel>().type != 99 && CellScript.map[i, j] < 10)
                             JewelSpawn.JewelList[i, j].GetComponent<Jewel>().Destroying();
@@ -124,8 +157,8 @@ public class Editor : MonoBehaviour
         Editor.down = true;
         if (MapLoader.Mode == 1)
             Menu.isRun = false;
-        for (int x = 0; x < 7; x++)
-            for (int y = 0; y < 9; y++)
+        for (int x = 0; x < CellScript.Instance.Size.x; x++)
+            for (int y = 0; y < CellScript.Instance.Size.y; y++)
                 if (JewelSpawn.JewelList[x, y] != null &&
                         JewelSpawn.JewelList[x, y].GetComponent<Jewel>().type == type &&
                         !JewelSpawn.JewelList[x, y].GetComponent<Jewel>().isMove)
@@ -151,11 +184,11 @@ public class Editor : MonoBehaviour
     /// <param name="y"></param>
     public static void cellprocess(int x, int y)
     {
-        if (y + 1 < 9 && CellScript.map[x, y + 1] > 10)
+        if (y + 1 < CellScript.Instance.Size.y && CellScript.map[x, y + 1] > 10)
         {
             CellScript.Cells[x, y + 1].GetComponent<Cell>().RemoveCellEffect();
         }
-        if (x + 1 < 7 && CellScript.map[x + 1, y] > 10)
+        if (x + 1 < CellScript.Instance.Size.x && CellScript.map[x + 1, y] > 10)
         {
             CellScript.Cells[x + 1, y].GetComponent<Cell>().RemoveCellEffect();
         }
@@ -237,8 +270,8 @@ public class Editor : MonoBehaviour
         Vector2 posmap = new Vector2(-1, -1);
         int dem = 0;
 
-        for (int i = 0; i < 7; i++)
-            for (int j = 0; j < 9; j++)
+        for (int i = 0; i < CellScript.Instance.Size.x; i++)
+            for (int j = 0; j < CellScript.Instance.Size.y; j++)
                 if (CellScript.map[i, j] > 0 && CellScript.Cells[i, j].GetComponent<Cell>().Type > 0 && CellScript.map[i, j] < 10)
                     tmp.Add(new Vector2(i, j));
                 else if (CellScript.map[i, j] > 0 && CellScript.Cells[i, j].GetComponent<Cell>().Type > 10)
@@ -295,7 +328,7 @@ public class Editor : MonoBehaviour
     public static void RowLighting(Vector2 PosMap)
     {
         int y = (int)PosMap.y;
-        for (int i = 0; i <= 6; i++)
+        for (int i = 0; i <= CellScript.Instance.Size.x-1; i++)
         {
             if (JewelSpawn.JewelList[i, y] != null && JewelSpawn.JewelList[i, y].GetComponent<Jewel>().type != 99 && CellScript.map[i, y] < 10)
                 JewelSpawn.JewelList[i, y].GetComponent<Jewel>().Destroying();
@@ -312,7 +345,7 @@ public class Editor : MonoBehaviour
     public static void ColumnLighting(Vector2 PosMap)
     {
         int x = (int)PosMap.x;
-        for (int i = 0; i <= 8; i++)
+        for (int i = 0; i <= CellScript.Instance.Size.y-1; i++)
         {
 
             if (JewelSpawn.JewelList[x, i] != null && JewelSpawn.JewelList[x, i].GetComponent<Jewel>().type != 99 && CellScript.map[x, i] < 10)
@@ -329,7 +362,7 @@ public class Editor : MonoBehaviour
     public static int MinCell(int x)
     {
         int min = -1;
-        for (int i = 0; i < 9; i++)
+        for (int i = 0; i < CellScript.Instance.Size.y; i++)
             if (CellScript.map[x, i] > 0)
                 return i;
         return min;
@@ -415,9 +448,9 @@ public class JewelController : MonoBehaviour
     public static List<Vector2> RightChecker(int type, int y, int x)
     {
         List<Vector2> dem = new List<Vector2>();
-        for (int i = x + 1; i < 7; i++)
+        for (int i = x + 1; i < CellScript.Instance.Size.x; i++)
         {
-            if (i <= 6)
+            if (i <= CellScript.Instance.Size.x-1)
             {
                 GameObject tmp = JewelSpawn.JewelList[i, y];
                 if (tmp != null && tmp.GetComponent<Jewel>().type == type &&
@@ -475,9 +508,9 @@ public class JewelController : MonoBehaviour
     public static List<Vector2> UpChecker(int type, int x, int y)
     {
         List<Vector2> dem = new List<Vector2>();
-        for (int i = y + 1; i < 9; i++)
+        for (int i = y + 1; i < CellScript.Instance.Size.y; i++)
         {
-            if (i <= 8)
+            if (i <= CellScript.Instance.Size.y-1)
             {
                 GameObject tmp = JewelSpawn.JewelList[x, i];
 

@@ -36,7 +36,7 @@ public class Process : MonoBehaviour
             isdroped = true;
             Editor.DropAll();
             GetComponent<JewelSpawn>().SpawnJe();
-            ShowStar();
+            //ShowStar();
         }
     }
     public void ShowStar()
@@ -55,7 +55,7 @@ public class Process : MonoBehaviour
         Editor.down = true;
         while (rowRandom == -1)
         {
-            rowRandom = Random.Range(0, 7);
+            rowRandom = Random.Range(0, CellScript.Instance.Size.x);
             if (ColumnNull(rowRandom))
                 rowRandom = -1;
         }
@@ -95,7 +95,7 @@ public class Process : MonoBehaviour
 
     bool ColumnNull(int x)
     {
-        for (int i = 0; i < 9; i++)
+        for (int i = 0; i < CellScript.Instance.Size.y; i++)
             if (CellScript.map[x, i] > 0)
                 return false;
         return true;

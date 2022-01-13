@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class MapLoader : MonoBehaviour
 {
 
 
     public static byte Mode = 1;
+    public static bool gameStarted = false;
+    public static int selectedLevel = 1;
 
     public static Player MapPlayer;
     public SpriteRenderer BackGround;
@@ -20,10 +23,12 @@ public class MapLoader : MonoBehaviour
     public Sprite[] numbersprite;
 
     public static int dem = 0;
-
+    public static List<int> RandomLevelTokenList;
+    
     void Awake()
     {
         time = TIMEPLAYER;
+        PlayerPrefs.DeleteAll();
     }
     // Use this for initialization
     IEnumerator Start()
@@ -46,15 +51,58 @@ public class MapLoader : MonoBehaviour
 
         //setLvlabel();
 
+        Menu.isRun = true;
+        selectedLevel = Random.Range(1, 5); // 4 groups
+        Debug.Log("Selected Level : " + selectedLevel);
+
+        int randomLevel = selectedLevel;
+
+        RandomLevelTokenList = new List<int>();
+
+        if (randomLevel == 1)
+        {
+            RandomLevelTokenList.Add(0);  // bitcoin
+            RandomLevelTokenList.Add(1);  // boss
+            RandomLevelTokenList.Add(2);  // cougar
+            RandomLevelTokenList.Add(3);  // pink
+        }
+        else if (randomLevel == 2)
+        {
+            RandomLevelTokenList.Add(4);  // etherium
+            RandomLevelTokenList.Add(1);  // boss
+            RandomLevelTokenList.Add(5);  // harmonape
+            RandomLevelTokenList.Add(6);  // harmony
+        }
+        else if (randomLevel == 3)
+        {
+            RandomLevelTokenList.Add(7);  // hydra
+            RandomLevelTokenList.Add(1);  // boss
+            RandomLevelTokenList.Add(8);  // monster
+            RandomLevelTokenList.Add(9);  // rvrs
+        }
+        else if (randomLevel == 4)
+        {
+            RandomLevelTokenList.Add(10); // solana
+            RandomLevelTokenList.Add(1);  // boss
+            RandomLevelTokenList.Add(11); // usdc
+            RandomLevelTokenList.Add(0);  // bitcoin
+        }
+        
+        Targets.Instance.PopulateTargets(RandomLevelTokenList.GetRandomElements(3));
+        
         ///- Level Wait
-        yield return new WaitForSeconds(0.2f);
+        gameStarted = false;
+        Time.timeScale = 3.0f;
+        yield return new WaitForSecondsRealtime(0.2f);
         CellScript.movedone = false;
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSecondsRealtime(0.2f);
         CellScript.movedone = true;
         JewelSpawn.isRespawn = true;
         GetComponent<Process>().enabled = true;
-        yield return new WaitForSeconds(3.0f);
+        yield return new WaitForSecondsRealtime(3.0f);
+        Time.timeScale = 1.0f;
         Loading.Instance.Hide();
+        gameStarted = true;
     }
 
     void setLvlabel()
