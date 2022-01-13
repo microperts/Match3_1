@@ -15,7 +15,7 @@ public class Jewel : MonoBehaviour
     public float baseY = -1;
     public bool isDrop = false;
     public bool isDestroy;
-    public int PowerUp = 0;
+    //public int PowerUp = 0;
     public Vector2 PowerUpPosition;
     public bool isProcess = false;
     public bool isMove = false;
@@ -168,12 +168,12 @@ public class Jewel : MonoBehaviour
             Vector2 tmp = Editor.powerUp1(listX, listY);
             if (x != (int)tmp.x || y != (int)tmp.y)
                 CallDestroy(tmp, 0);
-            else if (PowerUp == 0)
+            /*else if (PowerUp == 0)
             {
                 CallDestroy(tmp, 1);
                 PowerUp = 1;
                 Effect.SpawnEnchan(effect[0], gameObject);
-            }
+            }*/
             else
             {
                 CallDestroy(tmp, 0);
@@ -185,7 +185,7 @@ public class Jewel : MonoBehaviour
             Vector2 tmp = Editor.PowerUpType(listX, listY);
             if (x != (int)tmp.x || y != (int)tmp.y)
                 Destroying();
-            else
+            /*else
             {
                 CallDestroy(tmp, 0);
                 mtransform.Find("Render").GetComponent<SpriteRenderer>().enabled = false;
@@ -193,7 +193,7 @@ public class Jewel : MonoBehaviour
                 PowerUp = 9;
                 Effect.SpawnType9(effect[1], gameObject);
                 Editor.LightingRandomPoint();
-            }
+            }*/
 
         }
         isProcess = false;
@@ -247,7 +247,7 @@ public class Jewel : MonoBehaviour
 
             mtransform.Find("Render").GetComponent<Animator>().SetInteger("state", type);
             Editor.cellprocess((int)PosMap.x, (int)PosMap.y);
-            PowerProcess(PowerUp);
+            //PowerProcess(PowerUp);
             Effect.SpawnNumber(new Vector2(mtransform.position.x, mtransform.position.y), Number, NumberSprite, 0.5f);
 
             if (isSound)
@@ -322,7 +322,7 @@ public class Jewel : MonoBehaviour
             {
                 GameObject tmp = JewelSpawn.JewelList[(int)v.x, (int)v.y];
 
-                if (v == DestroyList[0] && tmp != null && tmp.GetComponent<Jewel>().PowerUp == 0)
+                if (v == DestroyList[0] && tmp != null /*&& tmp.GetComponent<Jewel>().PowerUp == 0*/)
                     tmp.GetComponent<Jewel>().isSound = true;
 
                 if (tmp != null && !tmp.GetComponent<Jewel>().isDestroy && tmp.GetComponent<Jewel>().type == type)
@@ -331,16 +331,16 @@ public class Jewel : MonoBehaviour
                         tmp.GetComponent<Jewel>().Destroying();
                     }
             }
-            else
+            /*else
             {
                 GameObject tmp = JewelSpawn.JewelList[(int)v.x, (int)v.y];
                 if (tmp != null && !tmp.GetComponent<Jewel>().isDestroy && tmp.GetComponent<Jewel>().type == type)
                     tmp.GetComponent<Jewel>().DoPowerUp(1);
-            }
+            }*/
         }
     }
 
-    public void DoPowerUp(int pow)
+    /*public void DoPowerUp(int pow)
     {
         if (PowerUp == 0 && pow == 1)
         {
@@ -354,7 +354,7 @@ public class Jewel : MonoBehaviour
             catch { }
         }
 
-    }
+    }*/
 
     int PosChecker(int x, int y)
     {
@@ -412,12 +412,12 @@ public class Jewel : MonoBehaviour
         return false;
 
     }
-    void playSound()
+    /*void playSound()
     {
         if (PowerUp == 1)
             Sound.sound.boom();
         else if (PowerUp == 2 || PowerUp == 3)
             Sound.sound.elec();
-    }
+    }*/
 
 }

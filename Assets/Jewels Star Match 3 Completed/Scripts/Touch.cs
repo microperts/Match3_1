@@ -406,8 +406,8 @@ public class Touch : MonoBehaviour
     }
     void classiclose()
     {
-        if (MapLoader.score > long.Parse(PlayerPrefs.GetString("ClassicHightScore", "0")))
-            PlayerPrefs.SetString("ClassicHightScore", MapLoader.score.ToString());
+        /*if (MapLoader.score > long.Parse(PlayerPrefs.GetString("ClassicHightScore", "0")))
+            PlayerPrefs.SetString("ClassicHightScore", MapLoader.score.ToString());*/
         LoseUI.SetActive(true);
         PlayingUI.SetActive(false);
         Sound.sound.fail();

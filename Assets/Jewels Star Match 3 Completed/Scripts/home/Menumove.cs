@@ -248,7 +248,7 @@ public class Menumove : MonoBehaviour
 
         MapLoader.MapPlayer = p;
         MapLoader.Mode = 0;
-        MapLoader.score = 0;
+        //MapLoader.score = 0;
         Application.LoadLevel(GlobalConsts.SCENE_PLAY);
     }
 

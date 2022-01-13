@@ -68,7 +68,7 @@ public class JewelSpawn : MonoBehaviour
                     if (sx != -1 && sx == x && sy == y)
                     {
                         tmp.GetComponent<Jewel>().type = 99;
-                        tmp.GetComponent<Jewel>().PowerUp = 99;
+                        //tmp.GetComponent<Jewel>().PowerUp = 99;
                         Effect.SpawnStarWin(tmp, star, true);
                         GameObject.Find("StarWin(Clone)").transform.GetChild(0).GetComponent<Animator>().enabled = true;
                         MapLoader.starwin = tmp;
@@ -108,11 +108,11 @@ public class JewelSpawn : MonoBehaviour
         tmp.transform.localPosition = new Vector3(x, posX[x] + 11, -1);
         tmp.GetComponent<Jewel>().type = rd;
         int r = Random.Range(0, 100);
-        if (r == 83 && MapLoader.Mode == 1)
+        /*if (r == 83 && MapLoader.Mode == 1)
         {
             Effect.SpawnClock(clock, tmp, new Vector3(0, 0, 0));
             tmp.GetComponent<Jewel>().PowerUp = 4;
-        }
+        }*/
 
         posX[x]++;
         tmp.GetComponent<Jewel>().PosMap = new Vector2(x, y);

@@ -15,8 +15,8 @@ public class Effect : MonoBehaviour
 			int idx = EffectTimer.Combo / 3;
 			if (idx > 12)
 						idx = 12;
-            if(!Menu.IsLose && !Menu.IsWin)            
-			    MapLoader.score += (idx+1) * 10;
+            /*if(!Menu.IsLose && !Menu.IsWin)            
+			    MapLoader.score += (idx+1) * 10;*/
 
             if (MapLoader.Mode == 0)
             {
@@ -39,7 +39,7 @@ public class Effect : MonoBehaviour
             if (SetCount == 30)
             {
                 SetCount = 0;
-                Editor.addLighting();
+                //Editor.addLighting();
             }
 		   
 			Destroy (tmp, time);

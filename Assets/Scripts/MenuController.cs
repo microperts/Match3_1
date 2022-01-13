@@ -16,7 +16,6 @@ public class MenuController : MonoBehaviour
 
         MapLoader.MapPlayer = p;
         MapLoader.Mode = 0;
-        MapLoader.score = 0;
         SceneManager.LoadScene(GlobalConsts.SCENE_PLAY);
     }
 }

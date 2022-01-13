@@ -13,7 +13,6 @@ public class MapLoader : MonoBehaviour
     public TextMesh[] TextMenu;
     public static float TIMEPLAYER = 200f;
     public static float time = 200f;
-    public static long score = 0;
     public static int CellNotEmpty;
     public static bool Starwin = false;
     public static GameObject starwin = null;
@@ -29,13 +28,11 @@ public class MapLoader : MonoBehaviour
     // Use this for initialization
     IEnumerator Start()
     {
-
         Time.timeScale = 1;
         Touch.supportTime = 7.5f;
         if (Mode == 1)
         {
             starwin = null;
-            score = 0;
             Starwin = false;
         }
         Editor.time = time;
@@ -45,16 +42,19 @@ public class MapLoader : MonoBehaviour
         Menu.IsLose = false;
         Effect.SetCount = 0;
         Effect.bonusLighting = 0;
-        setbackground();
+        //setbackground();
 
-        setLvlabel();
+        //setLvlabel();
 
-        yield return new WaitForSeconds(1.5f);
+        ///- Level Wait
+        yield return new WaitForSeconds(0.2f);
         CellScript.movedone = false;
-        yield return new WaitForSeconds(1.8f);
+        yield return new WaitForSeconds(0.2f);
+        CellScript.movedone = true;
         JewelSpawn.isRespawn = true;
         GetComponent<Process>().enabled = true;
-
+        yield return new WaitForSeconds(3.0f);
+        Loading.Instance.Hide();
     }
 
     void setLvlabel()
@@ -104,6 +104,6 @@ public class MapLoader : MonoBehaviour
 
     public void Scoreupdate()
     {
-        TextMenu[0].text = score.ToString();
+        //TextMenu[0].text = score.ToString();
     }
 }

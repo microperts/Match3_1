@@ -8,7 +8,7 @@ public class CellScript : MonoBehaviour
 {
     static public int[,] map;
     public GameObject CellPrefab;
-    public Vector2 Size;
+    public Vector2Int Size;
     public Transform parent;
     public static GameObject[,] Cells;
     public GameObject[] CellEffect;
@@ -21,20 +21,20 @@ public class CellScript : MonoBehaviour
     void Start()
     {
 
-        Cells = new GameObject[7, 9];
-        map = new int[7, 9];
+        Cells = new GameObject[Size.x,Size.y];
+        map = new int[Size.x,Size.y];
         map = mapReader(MapLoader.MapPlayer.Name);
         GribCreate(map);
     }
 
-    void Update()
+    /*void Update()
     {
         if (!movedone)
         {
             GribMove();
         }
 
-    }
+    }*/
     /// <summary>
     /// create cell grid 
     /// </summary>
@@ -63,8 +63,8 @@ public class CellScript : MonoBehaviour
         }
         else
         {
-            for (int y = 0; y < 9; y++)
-                for (int x = 0; x < 7; x++)
+            for (int y = 0; y < Size.y; y++)
+                for (int x = 0; x < Size.x; x++)
                 {
                     CellPrefab.GetComponent<SpriteRenderer>().sprite = CellPrefab.GetComponent<Cell>().cellsprite[0];
                     GameObject Cell = Instantiate(CellPrefab) as GameObject;
@@ -108,8 +108,8 @@ public class CellScript : MonoBehaviour
 #endif
         string[] result = mapdata.Split(new char[] { '	', '\n' });
         int dem = 0;
-        for (int y = 8; y >= 0; y--)
-            for (int x = 0; x < 7; x++)
+        for (int y = Size.y-1; y >= 0; y--)
+            for (int x = 0; x < Size.x; x++)
             {
                 tmpmap[x, y] = int.Parse(result[dem]);
                 dem++;

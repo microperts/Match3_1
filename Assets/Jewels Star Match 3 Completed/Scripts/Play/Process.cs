@@ -68,7 +68,7 @@ public class Process : MonoBehaviour
         try
         {
             tmp.GetComponent<Jewel>().type = 99;
-            tmp.GetComponent<Jewel>().PowerUp = 99;
+            //tmp.GetComponent<Jewel>().PowerUp = 99;
             Effect.SpawnStarWin(tmp, star, false);
             tmp.transform.Find("Render").GetComponent<SpriteRenderer>().enabled = false;
             MapLoader.starwin = tmp;

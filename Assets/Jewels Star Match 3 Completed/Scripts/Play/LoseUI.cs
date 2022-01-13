@@ -11,14 +11,14 @@ public class LoseUI : MonoBehaviour
     void Start()
     {
         Editor.down = true;
-        text[0].text = MapLoader.score.ToString();
+        text[0].text = Score.Value.ToString();
         if (MapLoader.Mode == 1)
             text[1].text = MapLoader.MapPlayer.HightScore.ToString();
         else
         {
-            if (MapLoader.score > long.Parse(PlayerPrefs.GetString("ClassicHightScore", "0")))
+            /*if (MapLoader.score > long.Parse(PlayerPrefs.GetString("ClassicHightScore", "0")))
                 PlayerPrefs.SetString("ClassicHightScore", MapLoader.score.ToString());
-            text[1].text = PlayerPrefs.GetString("ClassicHightScore", "0");
+            text[1].text = PlayerPrefs.GetString("ClassicHightScore", "0")*/;
         }
     }
 
@@ -82,7 +82,7 @@ public class LoseUI : MonoBehaviour
 
         MapLoader.MapPlayer = p;
         MapLoader.Mode = 0;
-        MapLoader.score = 0;
+        /*MapLoader.score = 0;*/
         Application.LoadLevel(GlobalConsts.SCENE_PLAY);
     }
 }

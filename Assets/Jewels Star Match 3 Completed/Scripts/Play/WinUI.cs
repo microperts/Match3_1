@@ -19,7 +19,7 @@ public class WinUI : MonoBehaviour
     void Start()
     {
         Editor.down = true;
-        score = MapLoader.score + (int)MapLoader.time * 500;
+       // score = Score.Value.ToString();//MapLoader.score + (int)MapLoader.time * 500;
         text[0].text = score.ToString();
         if (MapLoader.MapPlayer.HightScore < score)
             text[1].text = score.ToString();

@@ -338,7 +338,7 @@ public class Editor : MonoBehaviour
     /// <summary>
     /// add lighting power to random jewel
     /// </summary>
-    public static void addLighting()
+    /*public static void addLighting()
     {
         int x = -1;
         int y = -1;
@@ -360,7 +360,7 @@ public class Editor : MonoBehaviour
         }
 
 
-    }
+    }*/
 }
 /// <summary>
 /// get list of jewels same jewel type by position
@@ -491,6 +491,3 @@ public class JewelController : MonoBehaviour
     }
 
 }
-
-
-

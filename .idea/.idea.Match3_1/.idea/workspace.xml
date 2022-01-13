@@ -2,23 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="873dcdcf-9898-448f-aa08-15afdc9fb67b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Match3_1/.idea/indexLayout.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Match3_1/.idea/projectSettingsUpdater.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Match3_1/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Match3_1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Match3_1/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Prefabs/Jewel.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Prefabs/Jewel.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scenes/HomeScene.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scenes/HomeScene.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scenes/HomeSceneSettings.lighting" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scenes/HomeSceneSettings.lighting.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scenes/PlayScene.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scenes/PlayScene.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scenes/PlaySceneSettings.lighting" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scenes/PlaySceneSettings.lighting.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/CellScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/CellScript.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/Editor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/Editor.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/Effect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/Effect.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/JewelSpawn.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/JewelSpawn.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/MapLoader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/MapLoader.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/Object/Jewel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/Object/Jewel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/Play/LoseUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/Play/LoseUI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/Play/Process.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/Play/Process.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/Play/WinUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/Play/WinUI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/Touch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/Touch.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/home/Menumove.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/home/Menumove.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/PlayScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/PlayScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MenuController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/MenuController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logs/ApiUpdaterCheck.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/ApiUpdaterCheck.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -42,6 +41,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/MenuController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Dell/Desktop/Match3_1/Assets/Editor/CustomPlayBar.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Dell/Desktop/Match3_1/Assets/Editor/CustomPlayBar.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Loading.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Dell/Desktop/Match3_1/Assets/Editor/CustomPlayBar.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="23d91FjRykjTSVLg4Xk3IwbhqQO" />
@@ -93,7 +93,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1642052883932</updated>
-      <workItem from="1642052894467" duration="2016000" />
+      <workItem from="1642052894467" duration="4076000" />
     </task>
     <servers />
   </component>
