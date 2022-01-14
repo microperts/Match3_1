@@ -115,7 +115,7 @@ public class Logins : MonoBehaviour
         string uri = "https://boss-fall.herokuapp.com/api/user/register";
         var sendData = new SendData();
         sendData.username = username.text;
-        var guid = GUID.Generate();
+        var guid = System.Guid.NewGuid();
         sendData.walletId = guid.ToString();   //PlayerPrefs.GetString("PlayerName");
 
         Debug.Log(sendData.walletId);

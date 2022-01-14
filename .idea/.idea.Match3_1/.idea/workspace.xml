@@ -2,36 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="873dcdcf-9898-448f-aa08-15afdc9fb67b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Match3_1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Match3_1/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GraphicsSettings.preset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GraphicsSettings.preset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Prefabs/Jewel.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Prefabs/Jewel.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Prefabs/vienxanh.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Prefabs/vienxanh.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/Editor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/Editor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/MapLoader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/MapLoader.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/Object/Jewel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/Object/Jewel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/Supporter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/Supporter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/Touch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Jewels Star Match 3 Completed/Scripts/Touch.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/HomeScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/HomeScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/PlayScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/PlayScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MenuController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/MenuController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Targets.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Targets.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Turn.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Turn.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LoginAndSignup/Scripts/Logins.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/LoginAndSignup/Scripts/Logins.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Logs/ApiUpdaterCheck.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/ApiUpdaterCheck.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/AssetImportWorker0.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/AssetImportWorker0.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/AssetImportWorker1.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/AssetImportWorker1.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/AssetImportWorker2.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-AssetImportWorker0.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/shadercompiler-AssetImportWorker0.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe0.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe0.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe1.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe1.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe2.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe2.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe3.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe3.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe4.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe4.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe5.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe5.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe6.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe6.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe7.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe7.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,10 +62,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="26524">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="26524" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -112,6 +84,7 @@
       <workItem from="1642052894467" duration="4076000" />
       <workItem from="1642057213735" duration="14588000" />
       <workItem from="1642139428417" duration="17041000" />
+      <workItem from="1642165074802" duration="134000" />
     </task>
     <servers />
   </component>
