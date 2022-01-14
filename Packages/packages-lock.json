@@ -1,5 +1,19 @@
 {
   "dependencies": {
+    "com.components.ui": {
+      "version": "https://github.com/wajahatdeveloper/Modules.git?path=/Assets/com.components.ui",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "56f975c0171fa756c032b052e367ef29037cbc69"
+    },
+    "com.datastructures": {
+      "version": "https://github.com/wajahatdeveloper/Modules.git?path=/Assets/com.datastructures",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "56f975c0171fa756c032b052e367ef29037cbc69"
+    },
     "com.extensions": {
       "version": "https://github.com/wajahatdeveloper/Modules.git?path=/Assets/com.extensions",
       "depth": 0,
@@ -12,6 +26,17 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {}
+    },
+    "com.thirdparty.mybox": {
+      "version": "https://github.com/wajahatdeveloper/Modules.git?path=/Assets/EditorModules/com.thirdparty.mybox",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.ugui": "1.0.0",
+        "com.unity.modules.ai": "1.0.0",
+        "com.unity.modules.physics2d": "1.0.0"
+      },
+      "hash": "56f975c0171fa756c032b052e367ef29037cbc69"
     },
     "com.unity.2d.animation": {
       "version": "5.0.7",
@@ -171,6 +196,13 @@
         "com.unity.modules.ui": "1.0.0",
         "com.unity.modules.imgui": "1.0.0"
       }
+    },
+    "com.utility.package2folder": {
+      "version": "https://github.com/wajahatdeveloper/Modules.git?path=/Assets/EditorModules/com.utility.package2folder",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "56f975c0171fa756c032b052e367ef29037cbc69"
     },
     "com.utility.sceneswitcher": {
       "version": "https://github.com/wajahatdeveloper/Modules.git?path=/Assets/EditorModules/com.utility.sceneswitcher",

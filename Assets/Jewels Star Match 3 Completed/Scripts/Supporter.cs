@@ -14,7 +14,7 @@ public class Supporter : MonoBehaviour
             for (int y = 0; y < CellScript.Instance.Size.y; y++)
             {
                 GameObject tmp = JewelSpawn.JewelList[x, y];
-                if (tmp != null && CellScript.map[x, y] < 10)
+                if (tmp != null && CellScript.map[x, y] < 12)
                 {
                     virtualjewel[x, y] = tmp.GetComponent<Jewel>().type;
                 }
@@ -24,7 +24,6 @@ public class Supporter : MonoBehaviour
 
     public GameObject[] MoveSupportGameObject()
     {
-
         SetVirtualJewel();
         Vector2[] tmp = new Vector2[2];
         GameObject[] Objtmp = new GameObject[2];
@@ -46,6 +45,14 @@ public class Supporter : MonoBehaviour
         if (Result[0].x != -1)
         {
             Objtmp = ObjFinder(Result);
+            if (Objtmp != null && Objtmp[0] != null && Objtmp[1] != null && MapLoader.gameStarted)
+            {
+                Debug.Log("Matched " + Objtmp[0].GetComponent<Jewel>().type + " , " + Objtmp[1].GetComponent<Jewel>().type);
+            }
+        }
+        else
+        {
+            Debug.Log("Regen");
         }
 
         return Objtmp;
@@ -76,7 +83,9 @@ public class Supporter : MonoBehaviour
         sameType = same(x, y);
 
         if (sameType.Count < 0)
+        {
             return tmp;
+        }
         else
         {
             for (int i = 0; i < sameType.Count; i++)
@@ -298,7 +307,9 @@ public class Supporter : MonoBehaviour
 
 
         if (sameType.Count < 2)
+        {
             return tmp;
+        }
         else
         {
             for (int i = 0; i < sameType.Count; i++)

@@ -18,7 +18,7 @@ public class Editor : MonoBehaviour
     {
         if (MapLoader.gameStarted)
         {
-            if (r.Count == 5 && NeiChecker(r))
+            /*if (r.Count == 5 && NeiChecker(r))
             {
                 Debug.Log("5 match Row");
                 Targets.TargetMatch(type, 5);
@@ -29,9 +29,9 @@ public class Editor : MonoBehaviour
                 Debug.Log("5 match Column");
                 Targets.TargetMatch(type, 5);
                 Turn.Increment(2);
-            }
+            }*/
             
-            if (r.Count == 4 && NeiChecker(r))
+            /*if (r.Count == 4 && NeiChecker(r))
             {
                 Debug.Log("4 match Row");
                 Targets.TargetMatch(type, 4);
@@ -42,7 +42,7 @@ public class Editor : MonoBehaviour
                 Debug.Log("4 match Column");
                 Targets.TargetMatch(type, 4);
                 Turn.Increment(1);
-            }
+            }*/
         }
 
         if (r.Count == 4 && NeiChecker(r))

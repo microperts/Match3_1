@@ -115,7 +115,7 @@ public class Touch : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonDown(0))
+        /*if (Input.GetMouseButtonDown(0))
             if (CheckTouch(Input.mousePosition) != null && CheckTouch(Input.mousePosition).name.CompareTo("pause") == 0)
             {
                 if (!isPause && !Menu.IsLose && !Menu.IsWin)
@@ -123,23 +123,25 @@ public class Touch : MonoBehaviour
                     isPause = true;
                     StartCoroutine(waittodopause(1, 0));
                 }
-            }
-        if (Input.GetKeyDown(KeyCode.Escape) && !isPause && !Menu.IsWin && !Menu.IsLose)
+            }*/
+        /*if (Input.GetKeyDown(KeyCode.Escape) && !isPause && !Menu.IsWin && !Menu.IsLose)
         {
             isPause = true;
             PauseUI.SetActive(true);
             Time.timeScale = 0;
-        }
+        }*/
         SupposterTimeCountdown();
     }
 
     void SupposterTimeCountdown()
     {
-        if (Menu.isRun && supportTimeRp <= 0 && JewelSpawn.spawnStart)
+        Supposter();
+
+        /*if (Menu.isRun && supportTimeRp <= 0 && JewelSpawn.spawnStart)
         {
             Supposter();
         }
-        else if (Menu.isRun)
+        else*/ if (Menu.isRun)
         {
             supportTimeRp -= Time.deltaTime;
         }
@@ -172,7 +174,7 @@ public class Touch : MonoBehaviour
     {
         if (SupportObj[0] == null)
         {
-            sp.SetVirtualJewel();
+            //sp.SetVirtualJewel();
             SupportObj = sp.MoveSupportGameObject();
             if (SupportObj[0] == null)
             {
@@ -196,7 +198,7 @@ public class Touch : MonoBehaviour
         }
     }
 
-    void autoplay()
+    /*void autoplay()
     {
         if (SupportObj[0] != null && SupportObj[1] != null)
         {
@@ -213,8 +215,8 @@ public class Touch : MonoBehaviour
             SupportObj[1].GetComponent<Jewel>().JewelProcessing();
             JewelSwap(SupportObj[0], SupportObj[1]);
         }
-    }
-    IEnumerator waittodopause(int sprite, int sprite1)
+    }*/
+    /*IEnumerator waittodopause(int sprite, int sprite1)
     {
         Sound.sound.click();
         pausebutton.GetComponent<SpriteRenderer>().sprite = pausesprite[sprite];
@@ -222,7 +224,7 @@ public class Touch : MonoBehaviour
         pausebutton.GetComponent<SpriteRenderer>().sprite = pausesprite[sprite1];
         PauseUI.SetActive(true);
         Time.timeScale = 0;
-    }
+    }*/
 
     void removeSupportEffect(GameObject[] obj)
     {
@@ -352,8 +354,8 @@ public class Touch : MonoBehaviour
                 ListSwap(obj1, obj2);
                 obj1.GetComponent<Jewel>().JewelProcessing();
                 obj2.GetComponent<Jewel>().JewelProcessing();
-                Turn.Decrement(1);
                 JewelSwap(obj1, obj2);
+                Turn.Decrement(1);
             }
             else
             {
@@ -406,7 +408,15 @@ public class Touch : MonoBehaviour
     IEnumerator waitnomove()
     {
         RemoveSelectEffect(JewelSelected);
-        if (MapLoader.Mode == 1)
+        Editor.down = true;
+        Menu.isRun = false;
+        Destroy(Instantiate(nomove), 2.5f);
+        yield return new WaitForSeconds(2.5f);
+        JewelSpawn.isRespawn = true;
+        yield return new WaitForSeconds(1f);
+        Menu.isRun = true;
+        Editor.down = false;
+        /*if (MapLoader.Mode == 1)
         {
             Editor.down = true;
             Menu.isRun = false;
@@ -420,7 +430,7 @@ public class Touch : MonoBehaviour
         else
         {
             JewelSpawn.spawnStart = false;
-        }
+        }*/
     }
     void classiclose()
     {

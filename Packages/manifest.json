@@ -1,6 +1,9 @@
 {
   "dependencies": {
+    "com.components.ui": "https://github.com/wajahatdeveloper/Modules.git?path=/Assets/com.components.ui",
+    "com.datastructures": "https://github.com/wajahatdeveloper/Modules.git?path=/Assets/com.datastructures",
     "com.extensions": "https://github.com/wajahatdeveloper/Modules.git?path=/Assets/com.extensions",
+    "com.thirdparty.mybox": "https://github.com/wajahatdeveloper/Modules.git?path=/Assets/EditorModules/com.thirdparty.mybox",
     "com.unity.2d.animation": "5.0.7",
     "com.unity.2d.pixel-perfect": "4.0.1",
     "com.unity.2d.psdimporter": "4.1.0",
@@ -15,6 +18,7 @@
     "com.unity.textmeshpro": "3.0.6",
     "com.unity.timeline": "1.4.8",
     "com.unity.ugui": "1.0.0",
+    "com.utility.package2folder": "https://github.com/wajahatdeveloper/Modules.git?path=/Assets/EditorModules/com.utility.package2folder",
     "com.utility.sceneswitcher": "https://github.com/wajahatdeveloper/Modules.git?path=/Assets/EditorModules/com.utility.sceneswitcher",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",

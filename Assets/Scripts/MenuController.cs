@@ -6,20 +6,29 @@ using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour
 {
-    public static bool returningPlay = false;
+    public static bool ReturningPlay = false;
+    public static bool ShowLeaderboard = false;
 
     public GameObject loadingPanel;
+    public GameObject leaderboardPanel;
 
     private void OnEnable()
     {
         Time.timeScale = 1.0f;
-        if (returningPlay)
+        if (ReturningPlay)
         {
+            ReturningPlay = false;
             OnClick_Play();
         }
         else
         {
             loadingPanel.SetActive(false);
+        }
+
+        if (ShowLeaderboard)
+        {
+            ShowLeaderboard = false;
+            leaderboardPanel.SetActive(true);
         }
     }
 

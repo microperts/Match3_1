@@ -32,7 +32,7 @@ public class Targets : MonoBehaviour
         {
             var item = Instantiate(itemPrefab, content);
             item.GetComponentInChildren<Image>().sprite = jewelSpawn.JewelSprites[i];
-            int targetValue = Random.Range(20, 31);
+            int targetValue = Random.Range(23, 36);
             TargetValues.Add(i,targetValue);
             item.GetComponentInChildren<Text>().text = targetValue.ToString();
             targetTexts.Add(item.GetComponentInChildren<Text>());

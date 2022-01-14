@@ -1,6 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Networking;
+using Random = UnityEngine.Random;
 
 public class MapLoader : MonoBehaviour
 {
@@ -24,6 +27,13 @@ public class MapLoader : MonoBehaviour
 
     public static int dem = 0;
     public static List<int> RandomLevelTokenList;
+
+    [Serializable]
+    public class SaveScorePayload
+    {
+        public string username;
+        public int score;
+    }
     
     void Awake()
     {
@@ -33,8 +43,36 @@ public class MapLoader : MonoBehaviour
 
     public void RestartGame()
     {
-        MenuController.returningPlay = true;
-        SceneManagerX.LoadPreviousScene();
+        Loading.Instance.Show();
+
+        string payload = JsonUtility.ToJson(new SaveScorePayload()
+        {
+            username = Logins.UserName,
+            score = Score.Value
+        });
+
+        //string payload = "{ \"username\": \"adil\", \"score\": 100 }";
+        
+        Debug.Log(payload);
+
+        StartCoroutine(ApiHelper.Post("https://boss-fall.herokuapp.com/api/score", (response) =>
+        {
+            Debug.Log("Score updated (will only update on server if higher than previous score) (server side setting)");
+            //MenuController.returningPlay = true;
+            this.Invoke(SceneManagerX.LoadPreviousScene,4.0f);
+        }, (error) =>
+        {
+            Debug.Log("Error updating score : " + error);
+            //MenuController.returningPlay = true;
+            this.Invoke(SceneManagerX.LoadPreviousScene,4.0f);
+        }, payload));
+    }
+
+
+    public void OnClick_Leaderboard()
+    {
+        MenuController.ShowLeaderboard = true;
+        RestartGame();
     }
     
     IEnumerator Start()
@@ -63,6 +101,8 @@ public class MapLoader : MonoBehaviour
 
         int randomLevel = selectedLevel;
 
+       //     randomLevel = 1;
+        
         RandomLevelTokenList = new List<int>();
 
         if (randomLevel == 1)
@@ -73,6 +113,11 @@ public class MapLoader : MonoBehaviour
             RandomLevelTokenList.Add(3);  // pink
             RandomLevelTokenList.Add(11); // usdc
             RandomLevelTokenList.Add(10); // solana
+            
+                /*RandomLevelTokenList.Add(5);  // harmonape
+                RandomLevelTokenList.Add(6);  // harmony
+                RandomLevelTokenList.Add(9);  // rvrs
+                RandomLevelTokenList.Add(8);  // monster*/
         }
         else if (randomLevel == 2)
         {
@@ -101,7 +146,7 @@ public class MapLoader : MonoBehaviour
             RandomLevelTokenList.Add(7);  // hydra
             RandomLevelTokenList.Add(3);  // pink
         }
-
+        
         var randomList = RandomLevelTokenList.GetRandomElements(3);
         if (!randomList.Contains(1)) { randomList[0] = 1; }
         

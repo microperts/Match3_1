@@ -157,6 +157,7 @@ public class Jewel : MonoBehaviour
         
         isProcess = true;
         yield return null;
+        
         x = (int)PosMap.x;
         y = (int)PosMap.y;
 
@@ -164,6 +165,7 @@ public class Jewel : MonoBehaviour
         listY.Clear();
         listX = JewelController.RowChecker(type, y, x);
         listY = JewelController.ColumnChecker(type, x, y);
+        
         if (listX.Count + listY.Count == 3)
         {
             if (MapLoader.gameStarted)
@@ -178,18 +180,14 @@ public class Jewel : MonoBehaviour
             if (MapLoader.gameStarted)
             {
                 Score.Increment(4);
+                Turn.Increment(1);
+                Targets.TargetMatch(type, 4);
             }
             Vector2 tmp = Editor.powerUp1(type,listX, listY);
             if (x != (int)tmp.x || y != (int)tmp.y)
             {
                 CallDestroy(tmp, 0);
             }
-            /*else if (PowerUp == 0)
-            {
-                CallDestroy(tmp, 1);
-                PowerUp = 1;
-                Effect.SpawnEnchan(effect[0], gameObject);
-            }*/
             else
             {
                 CallDestroy(tmp, 0);
@@ -201,6 +199,8 @@ public class Jewel : MonoBehaviour
             if (MapLoader.gameStarted)
             {
                 Score.Increment(5);
+                Turn.Increment(2);
+                Targets.TargetMatch(type, 5);
             }
             Vector2 tmp = Editor.PowerUpType(listX, listY);
             if (x != (int)tmp.x || y != (int)tmp.y)
@@ -211,11 +211,6 @@ public class Jewel : MonoBehaviour
             {
                 CallDestroy(tmp, 0);
                 Destroying();
-                //mtransform.Find("Render").GetComponent<SpriteRenderer>().enabled = false;
-                //type = 9;
-                //PowerUp = 9;
-                //Effect.SpawnType9(effect[1], gameObject);
-                //Editor.LightingRandomPoint();
             }
 
         }
