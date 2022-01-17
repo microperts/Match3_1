@@ -29,8 +29,8 @@ public class Logins : MonoBehaviour
     public GameObject LoadingScreen;
 
     public Text usernameText;
-   
 
+    private string specialCharacter = "!@#$%^&*()_+{}[]:;'|?<>,.+-*/=- ";
 
     // Start is called before the first frame update
     void Start()
@@ -50,9 +50,21 @@ public class Logins : MonoBehaviour
     }
     public void submitButtonPressed()
     {
-        InputUserName.SetActive(false);
-        LoadingScreen.SetActive(true);
-        StartCoroutine(GetItems());
+        if(username.text != null && username.text.Length >= 3)
+        {
+            foreach(char ch in specialCharacter)
+            {
+                if (username.text.Contains(ch))
+                {
+                    return;
+                }
+            }
+            
+            InputUserName.SetActive(false);
+            LoadingScreen.SetActive(true);
+            StartCoroutine(GetItems());
+        }
+        
     }
     public void doneButtonPressed()
     {

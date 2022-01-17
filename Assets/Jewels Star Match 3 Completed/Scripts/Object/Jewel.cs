@@ -34,6 +34,7 @@ public class Jewel : MonoBehaviour
     public List<int> lowpos = new List<int>();
     public List<GameObject> column = new List<GameObject>();
     public bool isSound = false;
+    public Turn turn;
 
     Transform mtransform;
     BoxCollider2D mBoxCollider2D;
@@ -180,7 +181,8 @@ public class Jewel : MonoBehaviour
             if (MapLoader.gameStarted)
             {
                 Score.Increment(4);
-                Turn.Increment(1);
+                
+                Turn.OnIncrementScoreCallBack(1);
                 Targets.TargetMatch(type, 4);
             }
             Vector2 tmp = Editor.powerUp1(type,listX, listY);
@@ -193,13 +195,15 @@ public class Jewel : MonoBehaviour
                 CallDestroy(tmp, 0);
                 Destroying();
             }
+            
         }
         else if (listX.Count + listY.Count >= 5)
         {
             if (MapLoader.gameStarted)
             {
                 Score.Increment(5);
-                Turn.Increment(2);
+
+                Turn.OnIncrementScoreCallBack(2);
                 Targets.TargetMatch(type, 5);
             }
             Vector2 tmp = Editor.PowerUpType(listX, listY);
@@ -212,6 +216,7 @@ public class Jewel : MonoBehaviour
                 CallDestroy(tmp, 0);
                 Destroying();
             }
+            //turn.ShowPopupScore("+2");
 
         }
         isProcess = false;
@@ -443,6 +448,9 @@ public class Jewel : MonoBehaviour
         return false;
 
     }
+
+    
+
     /*void playSound()
     {
         if (PowerUp == 1)
