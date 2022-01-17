@@ -63,7 +63,7 @@ public class JewelSpawn : MonoBehaviour
                     tmp.transform.parent = parent.transform;
                     tmp.transform.localPosition = new Vector3(x, y + 11, -1);
                     tmp.GetComponent<Jewel>().type = rd;
-                    tmp.GetComponent<Jewel>().PosMap = new Vector2(x, y);
+                    tmp.GetComponent<Jewel>().PosMap = new Vector2Int(x, y);
                     //tmp.name = (x * 9 + y).ToString();
                     tmp.GetComponent<Jewel>().baseY = y;
 
@@ -83,7 +83,7 @@ public class JewelSpawn : MonoBehaviour
             }
         }
 
-        sp.SetVirtualJewel();
+        //sp.SetVirtualJewel();
         GameObject[] objchecker = sp.MoveSupportGameObject();
         if (objchecker[0] == null)
         {
@@ -119,7 +119,7 @@ public class JewelSpawn : MonoBehaviour
         }*/
 
         posX[x]++;
-        tmp.GetComponent<Jewel>().PosMap = new Vector2(x, y);
+        tmp.GetComponent<Jewel>().PosMap = new Vector2Int(x, y);
         tmp.GetComponent<Jewel>().baseY = y;
     }
 

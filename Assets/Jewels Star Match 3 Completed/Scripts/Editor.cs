@@ -14,7 +14,7 @@ public class Editor : MonoBehaviour
     public static bool[] isclickX = new bool[7];
     public static int[] isclickY = new int[8];
     // Use this for initialization
-    public static Vector2 powerUp1(int type, List<Vector2> r, List<Vector2> c)
+    public static Vector2Int powerUp1(int type, List<Vector2Int> r, List<Vector2Int> c)
     {
         if (MapLoader.gameStarted)
         {
@@ -54,24 +54,24 @@ public class Editor : MonoBehaviour
             return c[1];
         }
 
-        return new Vector2(-1, -1);
+        return new Vector2Int(-1, -1);
     }
 
-    public static Vector2 PowerUpType(List<Vector2> r, List<Vector2> c)
+    public static Vector2Int PowerUpType(List<Vector2Int> r, List<Vector2Int> c)
     {
         if (r.Count > 0 && c.Count > 0)
-            return new Vector2(c[0].x, r[0].y);
+            return new Vector2Int(c[0].x, r[0].y);
         else if (r.Count > 0 && NeiChecker(r))
             return r[2];
         else if (c.Count > 0 && NeiChecker(c))
             return c[2];
 
-        return new Vector2(-1, -1);
+        return new Vector2Int(-1, -1);
     }
 
-    public static bool NeiChecker(List<Vector2> l)
+    public static bool NeiChecker(List<Vector2Int> l)
     {
-        foreach (Vector2 v in l)
+        foreach (Vector2Int v in l)
         {
             GameObject tmp = JewelSpawn.JewelList[(int)v.x, (int)v.y];
             if (tmp != null && tmp.GetComponent<Jewel>().listX.Count > 0 && tmp.GetComponent<Jewel>().listY.Count > 0)
@@ -128,7 +128,7 @@ public class Editor : MonoBehaviour
     /// destroy jewels around position
     /// </summary>
     /// <param name="PosMap"></param>
-    public static void DestroyAround(Vector2 PosMap)
+    public static void DestroyAround(Vector2Int PosMap)
     {
         int x = (int)PosMap.x;
         int y = (int)PosMap.y;
@@ -206,7 +206,7 @@ public class Editor : MonoBehaviour
     /// </summary>
     public static void LightingRandomPoint()
     {
-        Vector2 postmp;
+        Vector2Int postmp;
         if (MapLoader.CellNotEmpty > 0)
         {
             postmp = RandomPoint();
@@ -239,11 +239,11 @@ public class Editor : MonoBehaviour
     /// random jewel under jewel star position
     /// </summary>
     /// <returns></returns>
-    public static Vector2 RandomStarWinPosLower()
+    public static Vector2Int RandomStarWinPosLower()
     {
-        List<Vector2> tmp = new List<Vector2>();
-        Vector2 posmap = new Vector2(-1, -1);
-        Vector2 posstar;
+        List<Vector2Int> tmp = new List<Vector2Int>();
+        Vector2Int posmap = new Vector2Int(-1, -1);
+        Vector2Int posstar;
         int r;
         try
         {
@@ -253,7 +253,7 @@ public class Editor : MonoBehaviour
 
         for (int i = 0; i < posstar.y; i++)
             if (CellScript.map[(int)posstar.x, i] > 0)
-                tmp.Add(new Vector2((int)posstar.x, i));
+                tmp.Add(new Vector2Int((int)posstar.x, i));
         if (tmp.Count > 0)
         {
             r = Random.Range(0, tmp.Count);
@@ -263,24 +263,24 @@ public class Editor : MonoBehaviour
 
     }
 
-    public static Vector2 RandomPoint()
+    public static Vector2Int RandomPoint()
     {
-        List<Vector2> tmp = new List<Vector2>();
-        List<Vector2> tmpPri = new List<Vector2>();
-        Vector2 posmap = new Vector2(-1, -1);
+        List<Vector2Int> tmp = new List<Vector2Int>();
+        List<Vector2Int> tmpPri = new List<Vector2Int>();
+        Vector2Int posmap = new Vector2Int(-1, -1);
         int dem = 0;
 
         for (int i = 0; i < CellScript.Instance.Size.x; i++)
             for (int j = 0; j < CellScript.Instance.Size.y; j++)
                 if (CellScript.map[i, j] > 0 && CellScript.Cells[i, j].GetComponent<Cell>().Type > 0 && CellScript.map[i, j] < 10)
-                    tmp.Add(new Vector2(i, j));
+                    tmp.Add(new Vector2Int(i, j));
                 else if (CellScript.map[i, j] > 0 && CellScript.Cells[i, j].GetComponent<Cell>().Type > 10)
-                    tmpPri.Add(new Vector2(i, j));
+                    tmpPri.Add(new Vector2Int(i, j));
 
         while (posmap.x != -1 || dem < 62)
         {
 
-            Vector2 vt;
+            Vector2Int vt;
             int r;
             if (tmpPri.Count > 0)
             {
@@ -325,7 +325,7 @@ public class Editor : MonoBehaviour
     /// destroy a row jewel
     /// </summary>
     /// <param name="PosMap"></param>
-    public static void RowLighting(Vector2 PosMap)
+    public static void RowLighting(Vector2Int PosMap)
     {
         int y = (int)PosMap.y;
         for (int i = 0; i <= CellScript.Instance.Size.x-1; i++)
@@ -342,7 +342,7 @@ public class Editor : MonoBehaviour
     /// destroy a column jewel
     /// </summary>
     /// <param name="PosMap"></param>
-    public static void ColumnLighting(Vector2 PosMap)
+    public static void ColumnLighting(Vector2Int PosMap)
     {
         int x = (int)PosMap.x;
         for (int i = 0; i <= CellScript.Instance.Size.y-1; i++)
@@ -400,11 +400,11 @@ public class Editor : MonoBehaviour
 /// </summary>
 public class JewelController : MonoBehaviour
 {
-    public static List<Vector2> RowChecker(int type, int y, int x)
+    public static List<Vector2Int> RowChecker(int type, int y, int x)
     {
-        List<Vector2> SameType = new List<Vector2>();
-        List<Vector2> l = LeftChecker(type, y, x);
-        List<Vector2> r = RightChecker(type, y, x);
+        List<Vector2Int> SameType = new List<Vector2Int>();
+        List<Vector2Int> l = LeftChecker(type, y, x);
+        List<Vector2Int> r = RightChecker(type, y, x);
 
         if (l.Count + r.Count >= 2)
         {
@@ -414,17 +414,17 @@ public class JewelController : MonoBehaviour
                 l.Remove(l[0]);
             }
 
-            SameType.Add(new Vector2(x, y));
+            SameType.Add(new Vector2Int(x, y));
 
-            foreach (Vector2 v in r)
+            foreach (Vector2Int v in r)
                 SameType.Add(v);
         }
         return SameType;
     }
 
-    public static List<Vector2> LeftChecker(int type, int y, int x)
+    public static List<Vector2Int> LeftChecker(int type, int y, int x)
     {
-        List<Vector2> dem = new List<Vector2>();
+        List<Vector2Int> dem = new List<Vector2Int>();
         for (int i = x - 1; i >= 0; i--)
         {
             if (i >= 0)
@@ -433,7 +433,7 @@ public class JewelController : MonoBehaviour
                 if (tmp != null && tmp.GetComponent<Jewel>().type == type &&
                         !tmp.GetComponent<Jewel>().isDestroy &&
     !tmp.GetComponent<Jewel>().isMove && CellScript.map[i, y] < 10)
-                    dem.Add(new Vector2(i, y));
+                    dem.Add(new Vector2Int(i, y));
                 else
                 {
                     dem = dem.OrderBy(v => v.x).ToList();
@@ -445,9 +445,9 @@ public class JewelController : MonoBehaviour
         return dem;
     }
 
-    public static List<Vector2> RightChecker(int type, int y, int x)
+    public static List<Vector2Int> RightChecker(int type, int y, int x)
     {
-        List<Vector2> dem = new List<Vector2>();
+        List<Vector2Int> dem = new List<Vector2Int>();
         for (int i = x + 1; i < CellScript.Instance.Size.x; i++)
         {
             if (i <= CellScript.Instance.Size.x-1)
@@ -456,7 +456,7 @@ public class JewelController : MonoBehaviour
                 if (tmp != null && tmp.GetComponent<Jewel>().type == type &&
                         !tmp.GetComponent<Jewel>().isDestroy &&
     !tmp.GetComponent<Jewel>().isMove && CellScript.map[i, y] < 10)
-                    dem.Add(new Vector2(i, y));
+                    dem.Add(new Vector2Int(i, y));
                 else
                     return dem;
             }
@@ -464,36 +464,36 @@ public class JewelController : MonoBehaviour
         return dem;
     }
 
-    public static List<Vector2> ColumnChecker(int type, int x, int y)
+    public static List<Vector2Int> ColumnChecker(int type, int x, int y)
     {
 
-        List<Vector2> SameType = new List<Vector2>();
-        List<Vector2> u = UpChecker(type, x, y);
-        List<Vector2> d = DownChecker(type, x, y);
+        List<Vector2Int> SameType = new List<Vector2Int>();
+        List<Vector2Int> u = UpChecker(type, x, y);
+        List<Vector2Int> d = DownChecker(type, x, y);
 
         if (u.Count + d.Count >= 2)
         {
-            foreach (Vector2 v in d)
+            foreach (Vector2Int v in d)
                 SameType.Add(v);
 
-            SameType.Add(new Vector2(x, y));
+            SameType.Add(new Vector2Int(x, y));
 
-            foreach (Vector2 v in u)
+            foreach (Vector2Int v in u)
                 SameType.Add(v);
         }
         return SameType;
     }
 
-    public static List<Vector2> DownChecker(int type, int x, int y)
+    public static List<Vector2Int> DownChecker(int type, int x, int y)
     {
-        List<Vector2> dem = new List<Vector2>();
+        List<Vector2Int> dem = new List<Vector2Int>();
         for (int i = y - 1; i >= 0; i--)
         {
             if (i >= 0)
             {
                 GameObject tmp = JewelSpawn.JewelList[x, i];
                 if (tmp != null && tmp.GetComponent<Jewel>().type == type && !tmp.GetComponent<Jewel>().isDestroy && !tmp.GetComponent<Jewel>().isMove && CellScript.map[x, i] < 10)
-                    dem.Add(new Vector2(x, i));
+                    dem.Add(new Vector2Int(x, i));
                 else
                 {
                     dem = dem.OrderBy(v => v.y).ToList();
@@ -505,9 +505,9 @@ public class JewelController : MonoBehaviour
         return dem;
     }
 
-    public static List<Vector2> UpChecker(int type, int x, int y)
+    public static List<Vector2Int> UpChecker(int type, int x, int y)
     {
-        List<Vector2> dem = new List<Vector2>();
+        List<Vector2Int> dem = new List<Vector2Int>();
         for (int i = y + 1; i < CellScript.Instance.Size.y; i++)
         {
             if (i <= CellScript.Instance.Size.y-1)
@@ -515,7 +515,7 @@ public class JewelController : MonoBehaviour
                 GameObject tmp = JewelSpawn.JewelList[x, i];
 
                 if (tmp != null && tmp.GetComponent<Jewel>().type == type && !tmp.GetComponent<Jewel>().isDestroy && !tmp.GetComponent<Jewel>().isMove && CellScript.map[x, i] < 10)
-                    dem.Add(new Vector2(x, i));
+                    dem.Add(new Vector2Int(x, i));
                 else
                     return dem;
             }

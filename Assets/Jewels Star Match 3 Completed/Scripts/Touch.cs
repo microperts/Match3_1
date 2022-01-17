@@ -291,8 +291,8 @@ public class Touch : MonoBehaviour
 
     void ListSwap(GameObject obj1, GameObject obj2)
     {
-        Vector2 vObj1Tmp = obj1.GetComponent<Jewel>().PosMap;
-        Vector2 vObj2Tmp = obj2.GetComponent<Jewel>().PosMap;
+        Vector2Int vObj1Tmp = obj1.GetComponent<Jewel>().PosMap;
+        Vector2Int vObj2Tmp = obj2.GetComponent<Jewel>().PosMap;
 
         JewelSpawn.JewelList[(int)vObj1Tmp.x, (int)vObj1Tmp.y] = null;
         JewelSpawn.JewelList[(int)vObj2Tmp.x, (int)vObj2Tmp.y] = null;
@@ -373,12 +373,12 @@ public class Touch : MonoBehaviour
 
     bool BackChecker(GameObject obj1, GameObject obj2)
     {
-        Vector2 vtmp1 = obj1.GetComponent<Jewel>().PosMap;
-        Vector2 vtmp2 = obj2.GetComponent<Jewel>().PosMap;
+        Vector2Int vtmp1 = obj1.GetComponent<Jewel>().PosMap;
+        Vector2Int vtmp2 = obj2.GetComponent<Jewel>().PosMap;
         int type1 = obj1.GetComponent<Jewel>().type;
 
-        List<Vector2> r = JewelController.RowChecker(type1, (int)vtmp2.y, (int)vtmp2.x);
-        List<Vector2> c = JewelController.ColumnChecker(type1, (int)vtmp2.x, (int)vtmp2.y);
+        List<Vector2Int> r = JewelController.RowChecker(type1, (int)vtmp2.y, (int)vtmp2.x);
+        List<Vector2Int> c = JewelController.ColumnChecker(type1, (int)vtmp2.x, (int)vtmp2.y);
         r.Remove(vtmp2);
         c.Remove(vtmp2);
         r.Remove(vtmp1);
@@ -396,7 +396,7 @@ public class Touch : MonoBehaviour
         return false;
     }
 
-    bool d_cheker(List<Vector2> r)
+    bool d_cheker(List<Vector2Int> r)
     {
         if (Mathf.Abs(r[0].x - r[1].x) > 2 || Mathf.Abs(r[0].y - r[1].y) > 2)
         {
@@ -432,13 +432,13 @@ public class Touch : MonoBehaviour
             JewelSpawn.spawnStart = false;
         }*/
     }
-    void classiclose()
+    /*void classiclose()
     {
         /*if (MapLoader.score > long.Parse(PlayerPrefs.GetString("ClassicHightScore", "0")))
-            PlayerPrefs.SetString("ClassicHightScore", MapLoader.score.ToString());*/
+            PlayerPrefs.SetString("ClassicHightScore", MapLoader.score.ToString());#1#
         LoseUI.SetActive(true);
         PlayingUI.SetActive(false);
         Sound.sound.fail();
-    }
+    }*/
 
 }

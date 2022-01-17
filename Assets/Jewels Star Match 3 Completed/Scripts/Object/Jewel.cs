@@ -6,9 +6,9 @@ using DG.Tweening;
 
 public class Jewel : MonoBehaviour
 {
-    public Vector2 PosMap;
-    public List<Vector2> listX;
-    public List<Vector2> listY;
+    public Vector2Int PosMap;
+    public List<Vector2Int> listX;
+    public List<Vector2Int> listY;
     public int indexinlist;
     public int type;
     public float X = -1;
@@ -17,7 +17,7 @@ public class Jewel : MonoBehaviour
     public bool isDrop = false;
     public bool isDestroy;
     //public int PowerUp = 0;
-    public Vector2 PowerUpPosition;
+    public Vector2Int PowerUpPosition;
     public bool isProcess = false;
     public bool isMove = false;
     public int dtype = -1;
@@ -132,7 +132,7 @@ public class Jewel : MonoBehaviour
             isMove = false;
 
             x = Mathf.RoundToInt(mtransform.localPosition.x);
-            PowerUpPosition = new Vector2(-1, -1);
+            PowerUpPosition = new Vector2Int(-1, -1);
 
             if (CellScript.map[(int)PosMap.x, (int)PosMap.y] % 10 != 4)
                 JewelProcessing();
@@ -173,7 +173,7 @@ public class Jewel : MonoBehaviour
                 Score.Increment(3);
                 Targets.TargetMatch(type, 3);
             }
-            CallDestroy(new Vector2(-1, -1), 0);
+            CallDestroy(new Vector2Int(-1, -1), 0);
         }
         else if (listX.Count + listY.Count == 4)
         {
@@ -183,7 +183,7 @@ public class Jewel : MonoBehaviour
                 Turn.Increment(1);
                 Targets.TargetMatch(type, 4);
             }
-            Vector2 tmp = Editor.powerUp1(type,listX, listY);
+            Vector2Int tmp = Editor.powerUp1(type,listX, listY);
             if (x != (int)tmp.x || y != (int)tmp.y)
             {
                 CallDestroy(tmp, 0);
@@ -202,7 +202,7 @@ public class Jewel : MonoBehaviour
                 Turn.Increment(2);
                 Targets.TargetMatch(type, 5);
             }
-            Vector2 tmp = Editor.PowerUpType(listX, listY);
+            Vector2Int tmp = Editor.PowerUpType(listX, listY);
             if (x != (int)tmp.x || y != (int)tmp.y)
             {
                 Destroying();
@@ -232,7 +232,7 @@ public class Jewel : MonoBehaviour
             isMove = true;
             JewelSpawn.JewelList[(int)PosMap.x, (int)PosMap.y] = null;
             JewelSpawn.JewelList[(int)PosMap.x, indexinlist] = gameObject;
-            PosMap = new Vector2((int)PosMap.x, indexinlist);
+            PosMap = new Vector2Int((int)PosMap.x, indexinlist);
             baseY = (int)PosMap.y;
         }
     }
@@ -277,7 +277,7 @@ public class Jewel : MonoBehaviour
             }
             Editor.cellprocess((int)PosMap.x, (int)PosMap.y);
             //PowerProcess(PowerUp);
-            //Effect.SpawnNumber(new Vector2(mtransform.position.x, mtransform.position.y), Number, NumberSprite, 0.5f);
+            //Effect.SpawnNumber(new Vector2Int(mtransform.position.x, mtransform.position.y), Number, NumberSprite, 0.5f);
 
             if (isSound)
                 Sound.sound.jewelclr();
@@ -292,7 +292,7 @@ public class Jewel : MonoBehaviour
     /// </summary>
     /// <param name="power"></param>
     /// <returns></returns>
-    bool PowerProcess(int power)
+    /*bool PowerProcess(int power)
     {
         switch (power)
         {
@@ -300,7 +300,7 @@ public class Jewel : MonoBehaviour
                 return false;
             case 1:
                 //boom
-                Effect.SpawnBoom(new Vector2(mtransform.position.x, mtransform.position.y), effect[2], 0.5f);
+                Effect.SpawnBoom(new Vector2Int(mtransform.position.x, mtransform.position.y), effect[2], 0.5f);
                 Editor.DestroyAround(PosMap);
                 return false;
             case 2:
@@ -320,7 +320,7 @@ public class Jewel : MonoBehaviour
         }
         return false;
 
-    }
+    }*/
 
     public void Destroying()
     {
@@ -331,21 +331,21 @@ public class Jewel : MonoBehaviour
     /// </summary>
     /// <param name="UnDestroyPosition"></param>
     /// <param name="pow"></param>
-    public void CallDestroy(Vector2 UnDestroyPosition, int pow)
+    public void CallDestroy(Vector2Int UnDestroyPosition, int pow)
     {
-        List<Vector2> DestroyList = new List<Vector2>();
-        foreach (Vector2 v in listX)
+        List<Vector2Int> DestroyList = new List<Vector2Int>();
+        foreach (Vector2Int v in listX)
         {
             DestroyList.Add(v);
         }
 
-        DestroyList.Add(new Vector2(x, y));
-        foreach (Vector2 v in listY)
+        DestroyList.Add(new Vector2Int(x, y));
+        foreach (Vector2Int v in listY)
         {
             DestroyList.Add(v);
         }
 
-        foreach (Vector2 v in DestroyList)
+        foreach (Vector2Int v in DestroyList)
         {
             if (v != UnDestroyPosition)
             {
@@ -412,11 +412,11 @@ public class Jewel : MonoBehaviour
 
     }
 
-    public void PlayMoveAnimation(Vector2 posmap2)
+    public void PlayMoveAnimation(Vector2Int posmap2)
     {
         StartCoroutine(MoveAnimation(posmap2));
     }
-    IEnumerator MoveAnimation(Vector2 posmap2)
+    IEnumerator MoveAnimation(Vector2Int posmap2)
     {
         int state = 100;
         if (PosMap.x < posmap2.x)
