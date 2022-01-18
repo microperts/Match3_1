@@ -10,7 +10,7 @@ public class Touch : MonoBehaviour
     GameObject ObjPointer;
     public GameObject JewelSelected;
     public GameObject JewelMatch;
-    GameObject[] SupportObj = new GameObject[2];
+    GameObject[] hintObjects = new GameObject[2];
     float postmp = -1;
     float postmp1 = -1;
     float postmp3 = -1;
@@ -19,8 +19,8 @@ public class Touch : MonoBehaviour
     bool ishold = false;
     bool isCheck = false;
     bool isSP = false;
-    public static float supportTime = 3f;
-    public static float supportTimeRp = 1.5f;
+    public static float hintTime = 3f;
+    //public static float supportTimeRp = 1.5f;
     public GameObject pausebutton;
     public Sprite[] pausesprite;
     public GameObject PlayingUI;
@@ -30,7 +30,7 @@ public class Touch : MonoBehaviour
     public GameObject br;
     public static bool isPause = false;
     public GameObject nomove;
-    Supporter sp;
+    Supporter hintSupporter;
 
     public GameObject vienxanh;
     
@@ -39,30 +39,35 @@ public class Touch : MonoBehaviour
     
     void Start()
     {
+        ///- Randomize Turns
         Turn.Value = Random.Range(15, 21);
         
-        sp = new Supporter();
+        hintSupporter = new Supporter();
         Editor.down = false;
-        supportTimeRp = 5f;
+       // supportTimeRp = 5f;
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         ///- Hint Button
-        if (Input.GetKeyDown(KeyCode.H))
+        /*if (Input.GetKeyDown(KeyCode.H))
         {
             giveHint = true;
-        }
+        }*/
+        
+        //Debug.Log(isMove);
         
         if (isMove)
         {
             if (clicktime > 0)
+            {
                 clicktime -= Time.deltaTime;
+            }
+            
             if (clicktime <= 0)
             {
                 isMove = false;
-                clicktime = 0.2f;
+                clicktime = 1f;
             }
         }
 
@@ -75,7 +80,6 @@ public class Touch : MonoBehaviour
                     Pointer = CheckTouch(Input.mousePosition);
                     if (Pointer != null && Pointer.name.Contains("Jewel"))
                     {
-
                         if (!Pointer.GetComponent<Jewel>().isMove && !Pointer.GetComponent<Jewel>().isDestroy)
                         {
                             JewelSelected = Pointer;
@@ -89,10 +93,11 @@ public class Touch : MonoBehaviour
 
                 if (ishold)
                 {
-                    supportTime = 3f;
-                    removeSupportEffect(SupportObj);
+                    hintTime = 3f;
+                    RemoveHintEffect(hintObjects);
                     ObjPointer = CheckTouch(Input.mousePosition);
                     if (ObjPointer != null && ObjPointer.name.Contains("Jewel"))
+                    {
                         if (JewelSelected != ObjPointer && !isCheck)
                         {
                             isCheck = true;
@@ -109,8 +114,9 @@ public class Touch : MonoBehaviour
                                 isCheck = false;
                                 ishold = false;
                             }
-                            ishold = false;
+                            ishold = false; 
                         }
+                    }
                 }
             }
         }
@@ -130,26 +136,29 @@ public class Touch : MonoBehaviour
             PauseUI.SetActive(true);
             Time.timeScale = 0;
         }*/
-        SupposterTimeCountdown();
+        HintTimeCountdown();
     }
 
-    void SupposterTimeCountdown()
+    void HintTimeCountdown()
     {
-        Supposter();
+        if (!isMove)
+        {
+            HintCheck();
+        }
 
         /*if (Menu.isRun && supportTimeRp <= 0 && JewelSpawn.spawnStart)
         {
             Supposter();
         }
-        else*/ if (Menu.isRun)
+        else if (Menu.isRun)
         {
             supportTimeRp -= Time.deltaTime;
-        }
+        }*/
 
-        if (supportTime > 0 && Menu.isRun)
+        if (hintTime > 0 && Menu.isRun)
         {
             isSP = false;
-            supportTime -= Time.deltaTime;
+            hintTime -= Time.deltaTime;
         }
         else if (!isSP && Menu.isRun)
         {
@@ -159,8 +168,8 @@ public class Touch : MonoBehaviour
                 giveHint = false;
                 try
                 {
-                    SupportObj[0].transform.Find("Render").GetComponent<Animator>().SetInteger("state", 101);
-                    SupportObj[1].transform.Find("Render").GetComponent<Animator>().SetInteger("state", 101);
+                    hintObjects[0].transform.Find("Render").GetComponent<Animator>().SetInteger("state", 101);
+                    hintObjects[1].transform.Find("Render").GetComponent<Animator>().SetInteger("state", 101);
                 }
                 catch
                 {
@@ -170,18 +179,20 @@ public class Touch : MonoBehaviour
         }
     }
 
-    void Supposter()
+    void HintCheck()
     {
-        if (SupportObj[0] == null)
+        if (hintObjects[0] == null)
         {
             //sp.SetVirtualJewel();
-            SupportObj = sp.MoveSupportGameObject();
-            if (SupportObj[0] == null)
+            ///- Regen if no matches (touch)
+            hintObjects = hintSupporter.GetHintSupportGameObjects();
+            if (hintObjects[0] == null)
             {
-                StartCoroutine(waitnomove());
-                supportTimeRp = 5f;
+                StartCoroutine(NoMoreMoves());
                 
-                /*if (MapLoader.Mode == 1)
+                 /*supportTimeRp = 1f;
+                
+               if (MapLoader.Mode == 1)
                 {
                     StartCoroutine(waitnomove());
                     supportTimeRp = 5f;
@@ -226,7 +237,7 @@ public class Touch : MonoBehaviour
         Time.timeScale = 0;
     }*/
 
-    void removeSupportEffect(GameObject[] obj)
+    void RemoveHintEffect(GameObject[] obj)
     {
         if (obj[0] != null)
         {
@@ -328,7 +339,7 @@ public class Touch : MonoBehaviour
     void WaitToBack(GameObject obj1, GameObject obj2)
     {
         RemoveSelectEffect(obj1);
-        Touch.supportTimeRp = 1.5f;
+        //Touch.supportTimeRp = 1.5f;
         isMove = true;
 
         /*if (obj1 != null && obj2 != null && obj1.GetComponent<Jewel>().type == 9 && obj2.GetComponent<Jewel>().type != 99)
@@ -405,7 +416,7 @@ public class Touch : MonoBehaviour
         return true;
     }
 
-    IEnumerator waitnomove()
+    IEnumerator NoMoreMoves()
     {
         RemoveSelectEffect(JewelSelected);
         Editor.down = true;

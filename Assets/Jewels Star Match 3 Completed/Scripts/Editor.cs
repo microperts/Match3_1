@@ -118,17 +118,17 @@ public class Editor : MonoBehaviour
                     JewelSpawn.JewelList[i, j].GetComponent<Jewel>().JewelDrop();
     }
 
-    public static void destroylist(List<GameObject> lst)
+    /*public static void destroylist(List<GameObject> lst)
     {
         foreach (GameObject o in lst)
             if (o != null)
                 o.GetComponent<Jewel>().iswaitdes = true;
-    }
+    }*/
     /// <summary>
     /// destroy jewels around position
     /// </summary>
     /// <param name="PosMap"></param>
-    public static void DestroyAround(Vector2Int PosMap)
+    /*public static void DestroyAround(Vector2Int PosMap)
     {
         int x = (int)PosMap.x;
         int y = (int)PosMap.y;
@@ -145,13 +145,13 @@ public class Editor : MonoBehaviour
                     }
 
 
-    }
+    }*/
     /// <summary>
     /// destroy all jewel same type of jewel to be choose
     /// </summary>
     /// <param name="obj"></param>
     /// <returns></returns>
-    public static IEnumerator DestroyAllType(GameObject obj)
+    /*public static IEnumerator DestroyAllType(GameObject obj)
     {
         int type = obj.GetComponent<Jewel>().type;
         Editor.down = true;
@@ -176,7 +176,7 @@ public class Editor : MonoBehaviour
                 }
         Editor.down = false;
         Menu.isRun = true;
-    }
+    }*/
     /// <summary>
     /// remove cell effect around position
     /// </summary>

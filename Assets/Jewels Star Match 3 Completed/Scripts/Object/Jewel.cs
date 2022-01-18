@@ -1,8 +1,7 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using DG.Tweening;
+using UnityEngine;
 
 public class Jewel : MonoBehaviour
 {
@@ -14,14 +13,14 @@ public class Jewel : MonoBehaviour
     public float X = -1;
     public float Y = -1;
     public float baseY = -1;
-    public bool isDrop = false;
+    public bool isDrop;
     public bool isDestroy;
     //public int PowerUp = 0;
     public Vector2Int PowerUpPosition;
-    public bool isProcess = false;
-    public bool isMove = false;
+    public bool isProcess;
+    public bool isMove;
     public int dtype = -1;
-    public bool iswaitdes = false;  //destroy flag
+    public bool iswaitdes;  //destroy flag
     int x;
     int y;
     float droptime = 0.45f;
@@ -118,8 +117,8 @@ public class Jewel : MonoBehaviour
     {
         isMove = true;
         Y = -1;
-        Touch.supportTime = 3f;
-        Touch.supportTimeRp = 1.5f;
+        Touch.hintTime = 3f;
+        //Touch.supportTimeRp = 1.5f;
         if (Mathf.Abs(baseY - mtransform.localPosition.y) > 0.15 && baseY < mtransform.localPosition.y)
         {
             mBoxCollider2D.enabled = false;
@@ -135,7 +134,7 @@ public class Jewel : MonoBehaviour
             x = Mathf.RoundToInt(mtransform.localPosition.x);
             PowerUpPosition = new Vector2Int(-1, -1);
 
-            if (CellScript.map[(int)PosMap.x, (int)PosMap.y] % 10 != 4)
+            if (CellScript.map[PosMap.x, PosMap.y] % 10 != 4)
                 JewelProcessing();
             if (type == 99)
                 if (WinChecker())
@@ -159,8 +158,8 @@ public class Jewel : MonoBehaviour
         isProcess = true;
         yield return null;
         
-        x = (int)PosMap.x;
-        y = (int)PosMap.y;
+        x = PosMap.x;
+        y = PosMap.y;
 
         listX.Clear();
         listY.Clear();
@@ -186,7 +185,7 @@ public class Jewel : MonoBehaviour
                 Targets.TargetMatch(type, 4);
             }
             Vector2Int tmp = Editor.powerUp1(type,listX, listY);
-            if (x != (int)tmp.x || y != (int)tmp.y)
+            if (x != tmp.x || y != tmp.y)
             {
                 CallDestroy(tmp, 0);
             }
@@ -207,7 +206,7 @@ public class Jewel : MonoBehaviour
                 Targets.TargetMatch(type, 5);
             }
             Vector2Int tmp = Editor.PowerUpType(listX, listY);
-            if (x != (int)tmp.x || y != (int)tmp.y)
+            if (x != tmp.x || y != tmp.y)
             {
                 Destroying();
             }
@@ -224,21 +223,14 @@ public class Jewel : MonoBehaviour
 
     public void JewelDrop()
     {
-        drop();
-    }
-    /// <summary>
-    /// find and move jewel to new position
-    /// </summary>
-    void drop()
-    {
-        indexinlist = PosChecker((int)PosMap.x, (int)PosMap.y);
+        indexinlist = PosChecker(PosMap.x, PosMap.y);
         if (indexinlist != -1 && indexinlist != PosMap.y)
         {
             isMove = true;
-            JewelSpawn.JewelList[(int)PosMap.x, (int)PosMap.y] = null;
-            JewelSpawn.JewelList[(int)PosMap.x, indexinlist] = gameObject;
-            PosMap = new Vector2Int((int)PosMap.x, indexinlist);
-            baseY = (int)PosMap.y;
+            JewelSpawn.JewelList[PosMap.x, PosMap.y] = null;
+            JewelSpawn.JewelList[PosMap.x, indexinlist] = gameObject;
+            PosMap = new Vector2Int(PosMap.x, indexinlist);
+            baseY = PosMap.y;
         }
     }
 
@@ -248,8 +240,8 @@ public class Jewel : MonoBehaviour
     /// <returns></returns>
     IEnumerator destroy()
     {
-        Touch.supportTime = 3f;
-        Touch.supportTimeRp = 1.5f;
+        Touch.hintTime = 3f;
+        //Touch.supportTimeRp = 1.5f;
         if (type < 99)
         {
             GetComponent<BoxCollider2D>().enabled = false;
@@ -257,7 +249,7 @@ public class Jewel : MonoBehaviour
             if (Process.SpawnWaitTime > 0)
                 Process.SpawnWaitTime = spamtime;
 
-            JewelSpawn.JewelList[(int)PosMap.x, (int)PosMap.y] = null;
+            JewelSpawn.JewelList[PosMap.x, PosMap.y] = null;
             isDestroy = true;
 
             /*try
@@ -280,7 +272,7 @@ public class Jewel : MonoBehaviour
             {
                 mtransform.Find("Render").GetComponent<Animator>().SetInteger("state", 6);
             }
-            Editor.cellprocess((int)PosMap.x, (int)PosMap.y);
+            Editor.cellprocess(PosMap.x, PosMap.y);
             //PowerProcess(PowerUp);
             //Effect.SpawnNumber(new Vector2Int(mtransform.position.x, mtransform.position.y), Number, NumberSprite, 0.5f);
 
@@ -354,7 +346,7 @@ public class Jewel : MonoBehaviour
         {
             if (v != UnDestroyPosition)
             {
-                GameObject tmp = JewelSpawn.JewelList[(int)v.x, (int)v.y];
+                GameObject tmp = JewelSpawn.JewelList[v.x, v.y];
 
                 if (v == DestroyList[0] && tmp != null /*&& tmp.GetComponent<Jewel>().PowerUp == 0*/)
                     tmp.GetComponent<Jewel>().isSound = true;
@@ -367,7 +359,7 @@ public class Jewel : MonoBehaviour
             }
             else
             {
-                GameObject tmp = JewelSpawn.JewelList[(int)v.x, (int)v.y];
+                GameObject tmp = JewelSpawn.JewelList[v.x, v.y];
                 /*if (tmp != null && !tmp.GetComponent<Jewel>().isDestroy && tmp.GetComponent<Jewel>().type == type)
                 {
                     /*tmp.GetComponent<Jewel>().DoPowerUp(1);#1#
@@ -441,7 +433,7 @@ public class Jewel : MonoBehaviour
     }
     bool WinChecker()
     {
-        if (Mathf.RoundToInt(mtransform.localPosition.y) == Editor.MinCell((int)PosMap.x))
+        if (Mathf.RoundToInt(mtransform.localPosition.y) == Editor.MinCell(PosMap.x))
         {
             return true;
         }

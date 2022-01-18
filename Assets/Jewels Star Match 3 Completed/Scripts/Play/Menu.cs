@@ -19,7 +19,7 @@ public class Menu : MonoBehaviour
 
     void Start()
     {
-        onetime = false;
+        /*onetime = false;
         if (MapLoader.Mode == 1)
         {
             value = 28.2f / MapLoader.time;
@@ -30,17 +30,17 @@ public class Menu : MonoBehaviour
             value = 28.2f / 5000f;
             scorebar = 0;
         }
-        StartCoroutine(wait());
+        StartCoroutine(wait());*/
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        if (isRun && MapLoader.Mode == 1)
+        /*if (isRun && MapLoader.Mode == 1)
             timeCountdown();
         else if (isRun && MapLoader.Mode == 0)
-            ScoreInc();
+            ScoreInc();*/
     }
     void timeCountdown()
     {
@@ -89,7 +89,7 @@ public class Menu : MonoBehaviour
     IEnumerator ClassicUplevel()
     {
         JewelSpawn.spawnStart = false;
-        Touch.supportTimeRp = 5f;
+        //Touch.supportTimeRp = 5f;
         //destroy all
         for (int x = 0; x < CellScript.Instance.Size.x; x++)
             for (int y = 0; y < CellScript.Instance.Size.y; y++)

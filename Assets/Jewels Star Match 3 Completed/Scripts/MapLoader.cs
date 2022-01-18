@@ -78,7 +78,7 @@ public class MapLoader : MonoBehaviour
     IEnumerator Start()
     {
         Time.timeScale = 1;
-        Touch.supportTime = 7.5f;
+        Touch.hintTime = 7.5f;
         if (Mode == 1)
         {
             starwin = null;
@@ -101,7 +101,7 @@ public class MapLoader : MonoBehaviour
 
         int randomLevel = selectedLevel;
 
-       //     randomLevel = 1;
+       //    randomLevel = 1;
         
         RandomLevelTokenList = new List<int>();
 

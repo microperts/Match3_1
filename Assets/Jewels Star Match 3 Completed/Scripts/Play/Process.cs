@@ -12,6 +12,7 @@ public class Process : MonoBehaviour
     public GameObject star;
     public static bool showstar;
     bool one = false;
+    
     void Start()
     {
         isdroped = true;
@@ -22,9 +23,8 @@ public class Process : MonoBehaviour
         DropTimerCd();
         SpawnTimerCd();
     }
-
-
-    void DropTimerCd()
+    
+    private void DropTimerCd()
     {
         if (DropTimer > 0)
         {
@@ -35,11 +35,11 @@ public class Process : MonoBehaviour
         {
             isdroped = true;
             Editor.DropAll();
-            GetComponent<JewelSpawn>().SpawnJe();
+            GetComponent<JewelSpawn>().SpawnJewel();
             //ShowStar();
         }
     }
-    public void ShowStar()
+    /*public void ShowStar()
     {
         if (showstar && !one)
         {
@@ -47,9 +47,9 @@ public class Process : MonoBehaviour
             showstar = false;
             StartCoroutine(AddStarWin());
         }
-    }
+    }*/
 
-    IEnumerator AddStarWin()
+    /*IEnumerator AddStarWin()
     {
         int rowRandom = -1;
         Editor.down = true;
@@ -77,9 +77,9 @@ public class Process : MonoBehaviour
         }
         catch { StartCoroutine(AddStarWin()); }
 
-    }
+    }*/
 
-    int MaxCell(int x)
+    /*int MaxCell(int x)
     {
         int y = 8;
         while (true)
@@ -99,7 +99,7 @@ public class Process : MonoBehaviour
             if (CellScript.map[x, i] > 0)
                 return false;
         return true;
-    }
+    }*/
 
     void SpawnTimerCd()
     {

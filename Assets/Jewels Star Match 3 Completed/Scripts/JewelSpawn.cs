@@ -67,28 +67,27 @@ public class JewelSpawn : MonoBehaviour
                     //tmp.name = (x * 9 + y).ToString();
                     tmp.GetComponent<Jewel>().baseY = y;
 
-                    if (sx != -1 && sx == x && sy == y)
+                    /*if (sx != -1 && sx == x && sy == y)
                     {
                         tmp.GetComponent<Jewel>().type = 99;
                         //tmp.GetComponent<Jewel>().PowerUp = 99;
                         Effect.SpawnStarWin(tmp, star, true);
                         GameObject.Find("StarWin(Clone)").transform.GetChild(0).GetComponent<Animator>().enabled = true;
                         MapLoader.starwin = tmp;
-                    }
+                    }*/
+                    
                     JewelList[x, y] = tmp;
 
-                    if (map[x, y] > 10 && map[x, y] % 10 == 4)
-                        break;
+                    /*if (map[x, y] > 20 && map[x, y] % 10 == 4)
+                        break;*/
                 }
             }
         }
 
         //sp.SetVirtualJewel();
-        GameObject[] objchecker = sp.MoveSupportGameObject();
-        if (objchecker[0] == null)
-        {
-            Respawn();
-        }
+        ///- Regen if no matches (at start)
+        GameObject[] objchecker = sp.GetHintSupportGameObjects();
+        if (objchecker[0] == null) { Respawn(); }
     }
 
     int RandomJewel()
@@ -123,13 +122,13 @@ public class JewelSpawn : MonoBehaviour
         tmp.GetComponent<Jewel>().baseY = y;
     }
 
-    IEnumerator waittodrop(GameObject obj)
+    /*IEnumerator waittodrop(GameObject obj)
     {
         yield return new WaitForSeconds(0.6f);
         obj.GetComponent<Jewel>().isDrop = true;
-    }
+    }*/
 
-    public void SpawnJe()
+    public void SpawnJewel()
     {
         if (spawnStart)
         {

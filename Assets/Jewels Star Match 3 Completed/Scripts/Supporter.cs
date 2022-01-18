@@ -1,16 +1,14 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
 
-public class Supporter : MonoBehaviour
+public class Supporter
 {
     public Vector2Int[] result = new Vector2Int[2];
     
     private int[,] _virtualJewelTypeMap;
     private Vector2Int _mapSize;
 
-    private void Awake()
+    public Supporter()
     {
         _mapSize = CellScript.Instance.Size;
         _virtualJewelTypeMap = new int[_mapSize.x, _mapSize.y];
@@ -33,7 +31,7 @@ public class Supporter : MonoBehaviour
             }
     }
 
-    public GameObject[] MoveSupportGameObject()
+    public GameObject[] GetHintSupportGameObjects()
     {
         var jewelPositions = new Vector2Int[2];
         var jewelObjects = new GameObject[2];
@@ -41,11 +39,12 @@ public class Supporter : MonoBehaviour
         UpdateVirtualJewelMap();
         
         for (int i = 0; i < _mapSize.x; i++)
+        {
             for (int j = 0; j < _mapSize.y; j++)
             {
                 if (_virtualJewelTypeMap[i, j] >= 0)
                 {
-                    jewelPositions = positionChecker(i, j);
+                    jewelPositions = CheckMatches(i, j);
                     if (jewelPositions[0].x != -1)
                     {
                         result = jewelPositions;
@@ -53,7 +52,9 @@ public class Supporter : MonoBehaviour
                     }
                 }
             }
+        }
         result = jewelPositions;
+        
     mgoto:
         if (result[0].x != -1)
         {
@@ -71,13 +72,13 @@ public class Supporter : MonoBehaviour
         }
 
         return jewelObjects;
-
     }
+    
     GameObject[] ObjFinder(Vector2Int[] v)
     {
         GameObject[] tmp = new GameObject[2];
-        tmp[0] = JewelSpawn.JewelList[(int)v[0].x, (int)v[0].y];
-        tmp[1] = JewelSpawn.JewelList[(int)v[1].x, (int)v[1].y];
+        tmp[0] = JewelSpawn.JewelList[v[0].x, v[0].y];
+        tmp[1] = JewelSpawn.JewelList[v[1].x, v[1].y];
         return tmp;
 
     }
@@ -89,41 +90,33 @@ public class Supporter : MonoBehaviour
                 _virtualJewelTypeMap[i, j] = -1;
     }
 
-    Vector2Int[] positionChecker(int x, int y)
+    Vector2Int[] CheckMatches(int x, int y)
     {
-        List<Vector2Int> sameType = new List<Vector2Int>();
-        Vector2Int[] tmp = new Vector2Int[2];
-        tmp[0] = new Vector2Int(-1, -1);
-        tmp[1] = new Vector2Int(-1, -1);
-        sameType = same(x, y);
+        Vector2Int[] matchPositions = new Vector2Int[2];
+        matchPositions[0] = new Vector2Int(-1, -1);
+        matchPositions[1] = new Vector2Int(-1, -1);
+        var sameType = GetSameTypeInVicinity(x, y);
 
-        if (sameType.Count < 0)
-        {
-            return tmp;
-        }
-        else
-        {
-            for (int i = 0; i < sameType.Count; i++)
-            {
-                tmp = YChecker(sameType[i], x, y);
-                if (tmp[0].x != -1)
-                    return tmp;
-                else
-                {
-                    tmp = XChecker(sameType[i], x, y);
-                    if (tmp[0].x != -1)
-                        return tmp;
-                }
-            }
+        if (sameType.Count <= 0) { return matchPositions; }
 
-            tmp = JumpChecker(x, y);
-            if (tmp[0].x != -1)
-            {
-                return tmp;
-            }
+        for (int i = 0; i < sameType.Count; i++)
+        {
+            matchPositions = YChecker(sameType[i], x, y);
+            if (matchPositions[0].x != -1)
+                return matchPositions;
+            
+            matchPositions = XChecker(sameType[i], x, y);
+            if (matchPositions[0].x != -1)
+                return matchPositions;
         }
 
-        return tmp;
+        matchPositions = JumpChecker(x, y);
+        if (matchPositions[0].x != -1)
+        {
+            return matchPositions;
+        }
+
+        return matchPositions;
     }
 
     Vector2Int[] XChecker(Vector2Int v, int x, int y)
@@ -141,7 +134,8 @@ public class Supporter : MonoBehaviour
                 tmp[1] = new Vector2Int(x, y + 1);
                 return tmp;
             }
-            else if (y - 1 >= 0 && _virtualJewelTypeMap[x, y - 1] >= 0)
+
+            if (y - 1 >= 0 && _virtualJewelTypeMap[x, y - 1] >= 0)
             {
                 tmp[0] = new Vector2Int(x, y);
                 tmp[1] = new Vector2Int(x, y - 1);
@@ -150,7 +144,7 @@ public class Supporter : MonoBehaviour
         }
 
 
-        if ((int)v.y > y && y + 2 < _mapSize.y && _virtualJewelTypeMap[x, y + 2] >= 0)
+        if (v.y > y && y + 2 < _mapSize.y && _virtualJewelTypeMap[x, y + 2] >= 0)
         {
             if (x - 1 >= 0 && _virtualJewelTypeMap[x - 1, y + 2] == _virtualJewelTypeMap[x, y])
             {
@@ -158,13 +152,15 @@ public class Supporter : MonoBehaviour
                 tmp[1] = new Vector2Int(x - 1, y + 2);
                 return tmp;
             }
-            else if (x + 1 <= _mapSize.x-1 && _virtualJewelTypeMap[x + 1, y + 2] == _virtualJewelTypeMap[x, y])
+
+            if (x + 1 <= _mapSize.x-1 && _virtualJewelTypeMap[x + 1, y + 2] == _virtualJewelTypeMap[x, y])
             {
                 tmp[0] = new Vector2Int(x, y + 2);
                 tmp[1] = new Vector2Int(x + 1, y + 2);
                 return tmp;
             }
-            else if (y + 3 <= _mapSize.y-1 && _virtualJewelTypeMap[x, y + 3] == _virtualJewelTypeMap[x, y])
+
+            if (y + 3 <= _mapSize.y-1 && _virtualJewelTypeMap[x, y + 3] == _virtualJewelTypeMap[x, y])
             {
                 tmp[0] = new Vector2Int(x, y + 2);
                 tmp[1] = new Vector2Int(x, y + 3);
@@ -172,7 +168,7 @@ public class Supporter : MonoBehaviour
             }
         }
 
-        else if ((int)v.y < y && y - 2 >= 0 && _virtualJewelTypeMap[x, y - 2] >= 0)
+        else if (v.y < y && y - 2 >= 0 && _virtualJewelTypeMap[x, y - 2] >= 0)
         {
             if (x - 1 >= 0 && _virtualJewelTypeMap[x - 1, y - 2] == _virtualJewelTypeMap[x, y])
             {
@@ -180,13 +176,15 @@ public class Supporter : MonoBehaviour
                 tmp[1] = new Vector2Int(x - 1, y - 2);
                 return tmp;
             }
-            else if (x + 1 <= _mapSize.x-1 && _virtualJewelTypeMap[x + 1, y - 2] == _virtualJewelTypeMap[x, y])
+
+            if (x + 1 <= _mapSize.x-1 && _virtualJewelTypeMap[x + 1, y - 2] == _virtualJewelTypeMap[x, y])
             {
                 tmp[0] = new Vector2Int(x, y - 2);
                 tmp[1] = new Vector2Int(x + 1, y - 2);
                 return tmp;
             }
-            else if (y - 3 >= 0 && _virtualJewelTypeMap[x, y - 3] == _virtualJewelTypeMap[x, y])
+
+            if (y - 3 >= 0 && _virtualJewelTypeMap[x, y - 3] == _virtualJewelTypeMap[x, y])
             {
                 tmp[0] = new Vector2Int(x, y - 2);
                 tmp[1] = new Vector2Int(x, y - 3);
@@ -212,7 +210,8 @@ public class Supporter : MonoBehaviour
                 tmp[1] = new Vector2Int(x + 1, y);
                 return tmp;
             }
-            else if (x - 1 >= 0 && _virtualJewelTypeMap[x - 1, y] >= 0)
+
+            if (x - 1 >= 0 && _virtualJewelTypeMap[x - 1, y] >= 0)
             {
                 tmp[0] = new Vector2Int(x, y);
                 tmp[1] = new Vector2Int(x - 1, y);
@@ -228,13 +227,15 @@ public class Supporter : MonoBehaviour
                 tmp[1] = new Vector2Int(x + 2, y - 1);
                 return tmp;
             }
-            else if (y + 1 <= _mapSize.y-1 && _virtualJewelTypeMap[x + 2, y + 1] == _virtualJewelTypeMap[x, y])
+
+            if (y + 1 <= _mapSize.y-1 && _virtualJewelTypeMap[x + 2, y + 1] == _virtualJewelTypeMap[x, y])
             {
                 tmp[0] = new Vector2Int(x + 2, y);
                 tmp[1] = new Vector2Int(x + 2, y + 1);
                 return tmp;
             }
-            else if (x + 3 <= _mapSize.x-1 && _virtualJewelTypeMap[x + 3, y] == _virtualJewelTypeMap[x, y])
+
+            if (x + 3 <= _mapSize.x-1 && _virtualJewelTypeMap[x + 3, y] == _virtualJewelTypeMap[x, y])
             {
                 tmp[0] = new Vector2Int(x + 2, y);
                 tmp[1] = new Vector2Int(x + 3, y);
@@ -249,13 +250,15 @@ public class Supporter : MonoBehaviour
                 tmp[1] = new Vector2Int(x - 2, y - 1);
                 return tmp;
             }
-            else if (y + 1 <= _mapSize.y-1 && _virtualJewelTypeMap[x - 2, y + 1] == _virtualJewelTypeMap[x, y])
+
+            if (y + 1 <= _mapSize.y-1 && _virtualJewelTypeMap[x - 2, y + 1] == _virtualJewelTypeMap[x, y])
             {
                 tmp[0] = new Vector2Int(x - 2, y);
                 tmp[1] = new Vector2Int(x - 2, y + 1);
                 return tmp;
             }
-            else if (x - 3 >= 0 && _virtualJewelTypeMap[x - 3, y] == _virtualJewelTypeMap[x, y])
+
+            if (x - 3 >= 0 && _virtualJewelTypeMap[x - 3, y] == _virtualJewelTypeMap[x, y])
             {
                 tmp[0] = new Vector2Int(x - 2, y);
                 tmp[1] = new Vector2Int(x - 3, y);
@@ -265,32 +268,32 @@ public class Supporter : MonoBehaviour
         return tmp;
     }
 
-    List<Vector2Int> same(int x, int y)
+    List<Vector2Int> GetSameTypeInVicinity(int x, int y)
     {
-        List<Vector2Int> lsttmp = new List<Vector2Int>();
-        Vector2Int[] tmp = new Vector2Int[4];
-        tmp[0] = new Vector2Int(x - 1, y);
-        tmp[1] = new Vector2Int(x + 1, y);
-        tmp[2] = new Vector2Int(x, y - 1);
-        tmp[3] = new Vector2Int(x, y + 1);
+        List<Vector2Int> matchList = new List<Vector2Int>();
+        
+        Vector2Int[] matchPositions = new Vector2Int[4];
+        matchPositions[0] = new Vector2Int(x - 1, y);
+        matchPositions[1] = new Vector2Int(x + 1, y);
+        matchPositions[2] = new Vector2Int(x, y - 1);
+        matchPositions[3] = new Vector2Int(x, y + 1);
 
         if (_virtualJewelTypeMap[x, y] == _mapSize.y)
         {
             for (int i = 0; i < 4; i++)
-                if ((int)tmp[i].x >= 0 && (int)tmp[i].y >= 0)
-                    if ((int)tmp[i].x < _mapSize.x && (int)tmp[i].y < _mapSize.y)
-                        lsttmp.Add(tmp[i]);
-            return lsttmp;
+                if (matchPositions[i].x >= 0 && matchPositions[i].y >= 0)
+                    if (matchPositions[i].x < _mapSize.x && matchPositions[i].y < _mapSize.y)
+                        matchList.Add(matchPositions[i]);
+            return matchList;
         }
-
-
+        
         for (int i = 0; i < 4; i++)
-            if ((int)tmp[i].x >= 0 && (int)tmp[i].y >= 0)
-                if ((int)tmp[i].x < _mapSize.x && (int)tmp[i].y < _mapSize.y)
-                    if (_virtualJewelTypeMap[(int)tmp[i].x, (int)tmp[i].y] == _virtualJewelTypeMap[x, y])
-                        lsttmp.Add(tmp[i]);
-        return lsttmp;
-
+            if (matchPositions[i].x >= 0 && matchPositions[i].y >= 0)
+                if (matchPositions[i].x < _mapSize.x && matchPositions[i].y < _mapSize.y)
+                    if (_virtualJewelTypeMap[matchPositions[i].x, matchPositions[i].y] == _virtualJewelTypeMap[x, y])
+                        matchList.Add(matchPositions[i]);
+        
+        return matchList;
     }
 
     List<Vector2Int> sameJump(int x, int y)
@@ -303,9 +306,9 @@ public class Supporter : MonoBehaviour
         tmp[3] = new Vector2Int(x - 1, y + 1);
 
         for (int i = 0; i < 4; i++)
-            if ((int)tmp[i].x >= 0 && (int)tmp[i].y >= 0)
-                if ((int)tmp[i].x < _mapSize.x && (int)tmp[i].y < _mapSize.y)
-                    if (_virtualJewelTypeMap[(int)tmp[i].x, (int)tmp[i].y] == _virtualJewelTypeMap[x, y])
+            if (tmp[i].x >= 0 && tmp[i].y >= 0)
+                if (tmp[i].x < _mapSize.x && tmp[i].y < _mapSize.y)
+                    if (_virtualJewelTypeMap[tmp[i].x, tmp[i].y] == _virtualJewelTypeMap[x, y])
                         lsttmp.Add(tmp[i]);
 
         return lsttmp;
@@ -325,22 +328,20 @@ public class Supporter : MonoBehaviour
         {
             return tmp;
         }
-        else
-        {
-            for (int i = 0; i < sameType.Count; i++)
-                for (int j = i + 1; j < sameType.Count; j++)
-                    if ((sameType[i].x + sameType[j].x) / 2 != x || (sameType[i].y + sameType[j].y) / 2 != y)
-                    {
-                        int tmpx = (int)(sameType[i].x + sameType[j].x) / 2;
-                        int tmpy = (int)(sameType[i].y + sameType[j].y) / 2;
-                        if (_virtualJewelTypeMap[tmpx, tmpy] >= 0)
-                        {
-                            tmp[0] = new Vector2Int(x, y);
-                            tmp[1] = new Vector2Int(tmpx, tmpy);
-                            return tmp;
-                        }
-                    }
-        }
+
+        for (int i = 0; i < sameType.Count; i++)
+        for (int j = i + 1; j < sameType.Count; j++)
+            if ((sameType[i].x + sameType[j].x) / 2 != x || (sameType[i].y + sameType[j].y) / 2 != y)
+            {
+                int tmpx = (sameType[i].x + sameType[j].x) / 2;
+                int tmpy = (sameType[i].y + sameType[j].y) / 2;
+                if (_virtualJewelTypeMap[tmpx, tmpy] >= 0)
+                {
+                    tmp[0] = new Vector2Int(x, y);
+                    tmp[1] = new Vector2Int(tmpx, tmpy);
+                    return tmp;
+                }
+            }
         return tmp;
     }
 }

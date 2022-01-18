@@ -72,7 +72,7 @@ public class Turn : MonoBehaviour
     private void Update()
     {
         ///- Turn Debug
-        if (Input.GetKeyDown(KeyCode.T))
+        /*if (Input.GetKeyDown(KeyCode.T))
         {
             Value += 10;
         }
@@ -85,7 +85,7 @@ public class Turn : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Y))
         {
             Value = 1;
-        }
+        }*/
         
         textElement.text = Value.ToString();
     }
