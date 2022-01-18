@@ -87,6 +87,7 @@ MonoBehaviour:
   lowpos: 
   column: []
   isSound: 0
+  turn: {fileID: 0}
 --- !u!61 &6100000
 BoxCollider2D:
   m_ObjectHideFlags: 0

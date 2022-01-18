@@ -12,7 +12,16 @@ public class Turn : MonoBehaviour
     public Text textElement;
 
     public static UnityEvent onZero;
-    
+
+    public GameObject popupScore;
+
+    public static event Action<int> OnIncrementInScore;
+
+    public static void OnIncrementScoreCallBack(int x)
+    {
+        OnIncrementInScore?.Invoke(x);
+    }
+
     public static int Value
     {
         get => PlayerPrefs.GetInt("turn", 0);
@@ -24,9 +33,20 @@ public class Turn : MonoBehaviour
         Instance = this;
     }
 
-    public static void Increment(int value)
+    private void Start()
+    {
+        OnIncrementInScore += Increment;
+    }
+    public  void Increment(int value)
     {
         Value = Value + value;
+        if (value == 1)
+        {
+            ShowPopupScore("+1");
+        }else if(value == 2)
+        {
+            ShowPopupScore("+2");
+        }
     }
     
     public static void Decrement(int value)
@@ -68,5 +88,31 @@ public class Turn : MonoBehaviour
         }
         
         textElement.text = Value.ToString();
+    }
+
+    public  void ShowPopupScore(string textToPrint)
+    {
+        // UpdateBar();
+
+        //var parent = GameObject.Find("PopUpScore").transform;
+        popupScore.SetActive(true);
+        this.Invoke(() =>popupScore.SetActive(false),1.5f);
+
+        //var poptxt = Instantiate(popupScore, parent.position, Quaternion.identity);
+        // popupScore.SetActive(true);
+        //DisableMove();
+        //poptxt.transform.GetComponentInChildren<Text>().text = textToPrint;
+        //if (color <= scoresColors.Length - 1)
+        //{
+        //    poptxt.transform.GetComponentInChildren<Text>().color = scoresColors[color];
+        //    poptxt.transform.GetComponentInChildren<Outline>().effectColor = scoresColorsOutline[color];
+        //}
+
+        //poptxt.transform.SetParent(parent);
+
+        //   poptxt.transform.position += Vector3.right * 1;
+        //poptxt.transform.localScale = Vector3.one / 1.5f;
+        //Destroy(poptxt, 0.9f);
+
     }
 }
