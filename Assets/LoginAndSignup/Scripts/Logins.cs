@@ -19,20 +19,15 @@ public class Logins : MonoBehaviour
     public static string UserName;
     
     public GameObject preConnection;
-
     public GameObject InputUserName;
-    
     public GameObject postConnection;
-
     public InputField username;
-
     public GameObject LoadingScreen;
-
     public Text usernameText;
+    public WebLogin webLogin;
 
-    private string specialCharacter = "!@#$%^&*()_+{}[]:;'|?<>,.+-*/=- ";
-
-    // Start is called before the first frame update
+    private string specialCharacter = "!@#$%^&*()_+{}[]:;'|?<>,.+-*/=- \"";
+    
     void Start()
     {
         usernameText.text = UserName ?? "Username";
@@ -45,9 +40,17 @@ public class Logins : MonoBehaviour
 
     public void connectButtonPressed()
     {
-        InputUserName.SetActive(true);
-        preConnection.SetActive(false);
+        LoadingScreen.SetActive(true);
+        webLogin.onConnected.AddListener(() =>
+        {
+            LoadingScreen.SetActive(false);
+            Debug.Log("Wallet Connected");
+            InputUserName.SetActive(true);
+            preConnection.SetActive(false);
+        });
+        webLogin.OnLogin();
     }
+    
     public void submitButtonPressed()
     {
         if(username.text != null && username.text.Length >= 3)

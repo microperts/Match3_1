@@ -186,7 +186,11 @@ public class Touch : MonoBehaviour
             //sp.SetVirtualJewel();
             ///- Regen if no matches (touch)
             hintObjects = hintSupporter.GetHintSupportGameObjects();
-            if (hintObjects[0] == null)
+            /*if (hintObjects[0].GetComponent<Jewel>().type != hintObjects[1].GetComponent<Jewel>().type)
+            {
+                StartCoroutine(NoMoreMoves());
+            }
+            else*/ if (hintObjects[0] == null || hintObjects[1] == null)
             {
                 StartCoroutine(NoMoreMoves());
                 

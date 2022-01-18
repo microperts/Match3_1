@@ -11,6 +11,7 @@ public class MenuController : MonoBehaviour
 
     public GameObject loadingPanel;
     public GameObject leaderboardPanel;
+    public WebGLTransfer20 Transfer20;
 
     private void OnEnable()
     {
@@ -34,15 +35,28 @@ public class MenuController : MonoBehaviour
 
     public void OnClick_Play()
     {
-        Player p = new Player();
-        p.HightScore = long.Parse(PlayerPrefs.GetString("ClassicHightScore", "0"));
-        p.Level = 1;
-        p.Name = "classic";
-        p.Stars = 0;
-        p.UnLocked = true;
+        loadingPanel.SetActive(true);
 
-        MapLoader.MapPlayer = p;
-        MapLoader.Mode = 0;
-        SceneManager.LoadScene(GlobalConsts.SCENE_PLAY);
+        Transfer20.onFailure.AddListener(()=>
+        {
+            loadingPanel.SetActive(false);
+            PopupMessage.Instance.Show("Failed to transfer, please try again later");
+        });
+        
+        Transfer20.onSuccess.AddListener(()=>
+        {
+            Player p = new Player();
+            p.HightScore = long.Parse(PlayerPrefs.GetString("ClassicHightScore", "0"));
+            p.Level = 1;
+            p.Name = "classic";
+            p.Stars = 0;
+            p.UnLocked = true;
+
+            MapLoader.MapPlayer = p;
+            MapLoader.Mode = 0;
+            SceneManager.LoadScene(GlobalConsts.SCENE_PLAY);
+        });
+        
+        Transfer20.Transfer();
     }
 }

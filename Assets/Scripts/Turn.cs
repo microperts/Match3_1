@@ -13,7 +13,7 @@ public class Turn : MonoBehaviour
 
     public static UnityEvent onZero;
 
-    public GameObject popupScore;
+    private GameObject popupScore;
 
     public static event Action<int> OnIncrementInScore;
 
@@ -95,8 +95,11 @@ public class Turn : MonoBehaviour
         // UpdateBar();
 
         //var parent = GameObject.Find("PopUpScore").transform;
-        popupScore.SetActive(true);
-        this.Invoke(() =>popupScore.SetActive(false),1.5f);
+        var popupObject = Resources.Load<GameObject>("PopupScores");
+        popupScore = Instantiate(popupObject,GameObject.FindObjectOfType<UIControl>().transform);
+        popupScore.GetComponentInChildren<Text>().text = textToPrint;
+        //popupScore.SetActive(true);
+        /*this.Invoke(() =>popupScore.SetActive(false),1.5f);*/
 
         //var poptxt = Instantiate(popupScore, parent.position, Quaternion.identity);
         // popupScore.SetActive(true);

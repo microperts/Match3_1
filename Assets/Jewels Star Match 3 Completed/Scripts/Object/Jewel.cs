@@ -33,7 +33,7 @@ public class Jewel : MonoBehaviour
     public List<int> lowpos = new List<int>();
     public List<GameObject> column = new List<GameObject>();
     public bool isSound = false;
-    public Turn turn;
+    //public Turn turn;
 
     Transform mtransform;
     BoxCollider2D mBoxCollider2D;

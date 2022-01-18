@@ -63,6 +63,10 @@ public class Supporter
             {
                 var j1 = jewelObjects[0].GetComponent<Jewel>();
                 var j2 = jewelObjects[1].GetComponent<Jewel>();
+                if (j1.type != j2.type)
+                {
+                    Debug.Log("No Virtual Matches Found, Regenerating Board");
+                }
                 Debug.Log($"Found Virtual Match of {j1.type} at {j1.PosMap} and {j2.type} at {j2.PosMap}");
             }
         }
